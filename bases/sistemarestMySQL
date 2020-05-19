@@ -1,0 +1,238 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.2
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 20-05-2020 a las 02:00:04
+-- Versión del servidor: 10.1.34-MariaDB
+-- Versión de PHP: 7.2.7
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `sistemarest`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `articulos`
+--
+
+CREATE TABLE `articulos` (
+  `id_articulo` int(11) NOT NULL,
+  `nombre` varchar(40) NOT NULL,
+  `precio` int(11) NOT NULL,
+  `unidad_medida` varchar(11) NOT NULL,
+  `stock_minimo` int(11) NOT NULL,
+  `stock_almacenado` int(11) NOT NULL,
+  `stock_maximo` int(11) NOT NULL,
+  `descripcion` varchar(40) NOT NULL,
+  `estatus` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `articulos`
+--
+
+INSERT INTO `articulos` (`id_articulo`, `nombre`, `precio`, `unidad_medida`, `stock_minimo`, `stock_almacenado`, `stock_maximo`, `descripcion`, `estatus`) VALUES
+(1, 'tomate', 20, 'kg', 3, 10, 20, 'tomate bola', 1),
+(2, 'lechuga', 6, 'piezas', 10, 30, 50, 'hoja de lechuga', 1),
+(3, 'albahaca', 10, 'kg', 1, 2, 3, 'albahaca fresca', 1),
+(4, 'queso Mozzarella', 50, 'kg', 2, 3, 4, 'queso fresco', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `articulos_proveedores`
+--
+
+CREATE TABLE `articulos_proveedores` (
+  `id_articulos_proveedores` int(11) NOT NULL,
+  `id_articulo` int(11) NOT NULL,
+  `id_proveedor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `articulos_proveedores`
+--
+
+INSERT INTO `articulos_proveedores` (`id_articulos_proveedores`, `id_articulo`, `id_proveedor`) VALUES
+(1, 3, 2),
+(2, 1, 1),
+(3, 4, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proveedores`
+--
+
+CREATE TABLE `proveedores` (
+  `id_proveedor` int(11) NOT NULL,
+  `nombre` varchar(40) NOT NULL,
+  `correo` varchar(40) NOT NULL,
+  `telefono` varchar(40) NOT NULL,
+  `direccion` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `proveedores`
+--
+
+INSERT INTO `proveedores` (`id_proveedor`, `nombre`, `correo`, `telefono`, `direccion`) VALUES
+(1, 'Invernaderos la soledad', 'lasoledad@gmail.com', '9512567898', 'Ex-hacienda la Soledad Atzompa'),
+(2, 'Biohuacal', 'biohuacal@gmail.com', '222456789', 'San Felipe del Agua');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `recetas`
+--
+
+CREATE TABLE `recetas` (
+  `id_receta` int(11) NOT NULL,
+  `nombre_platillo` varchar(40) NOT NULL,
+  `foto_empresa` varchar(40) NOT NULL,
+  `foto_receta` varchar(40) NOT NULL,
+  `codigo` int(11) NOT NULL,
+  `categoria` varchar(40) NOT NULL,
+  `rendimiento` int(11) NOT NULL,
+  `presentacion` text NOT NULL,
+  `foto_logo` varchar(40) NOT NULL,
+  `importe_total` double NOT NULL,
+  `mise_en_place` text NOT NULL,
+  `preparacion` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `recetas`
+--
+
+INSERT INTO `recetas` (`id_receta`, `nombre_platillo`, `foto_empresa`, `foto_receta`, `codigo`, `categoria`, `rendimiento`, `presentacion`, `foto_logo`, `importe_total`, `mise_en_place`, `preparacion`) VALUES
+(1, 'ensalada caprese', 'data:image/jpeg;base64,/9j/4AAQSkZJRgABA', 'https://t1.rg.ltmcdn.com/es/images/7/1/3', 1, 'ensalada', 1, ' tomamos un plato o una fuente plana y vamos acomodando los ingredientes intercalando una rodaja de tomate, una de mozzarella, una hoja de albahaca fresca y así sucesivamente. Aderezamos con la preparación realizada con anterioridad y espolvoreamos con un toque de pimienta en grano recién molida para completar la decoración de esta deliciosa e irresistible ensalada caprese. Esta ensalada se puede consumir sola como entrante, pero también, es ideal para acompañar cualquier tipo de carne asada.', 'https://i.pinimg.com/originals/28/e9/61/', 100, 'Cortar el tomate en rodajas\r\nSeleccionar las hojas de albahaca', ' sazonar esta exquisita ensalada caprese, realizamos una preparación con unas hojitas de albahaca fresca picada, aceite de oliva virgen extra, sal y pimienta negra recién molida. Otra opción totalmente válida es condimentar la ensalada con salsa pesto casera.');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `recetas_articulos`
+--
+
+CREATE TABLE `recetas_articulos` (
+  `id_receta_articulo` int(11) NOT NULL,
+  `id_receta` int(11) NOT NULL,
+  `id_articulo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `recetas_articulos`
+--
+
+INSERT INTO `recetas_articulos` (`id_receta_articulo`, `id_receta`, `id_articulo`) VALUES
+(1, 1, 3),
+(2, 1, 1),
+(3, 1, 4);
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `articulos`
+--
+ALTER TABLE `articulos`
+  ADD PRIMARY KEY (`id_articulo`);
+
+--
+-- Indices de la tabla `articulos_proveedores`
+--
+ALTER TABLE `articulos_proveedores`
+  ADD PRIMARY KEY (`id_articulos_proveedores`),
+  ADD KEY `id_articulo` (`id_articulo`),
+  ADD KEY `id_proveedor` (`id_proveedor`);
+
+--
+-- Indices de la tabla `proveedores`
+--
+ALTER TABLE `proveedores`
+  ADD PRIMARY KEY (`id_proveedor`);
+
+--
+-- Indices de la tabla `recetas`
+--
+ALTER TABLE `recetas`
+  ADD PRIMARY KEY (`id_receta`);
+
+--
+-- Indices de la tabla `recetas_articulos`
+--
+ALTER TABLE `recetas_articulos`
+  ADD PRIMARY KEY (`id_receta_articulo`),
+  ADD KEY `id_receta` (`id_receta`),
+  ADD KEY `id_articulo` (`id_articulo`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `articulos`
+--
+ALTER TABLE `articulos`
+  MODIFY `id_articulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `articulos_proveedores`
+--
+ALTER TABLE `articulos_proveedores`
+  MODIFY `id_articulos_proveedores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `proveedores`
+--
+ALTER TABLE `proveedores`
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `recetas`
+--
+ALTER TABLE `recetas`
+  MODIFY `id_receta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `recetas_articulos`
+--
+ALTER TABLE `recetas_articulos`
+  MODIFY `id_receta_articulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `articulos_proveedores`
+--
+ALTER TABLE `articulos_proveedores`
+  ADD CONSTRAINT `articulos_proveedores_ibfk_1` FOREIGN KEY (`id_articulo`) REFERENCES `articulos` (`id_articulo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `articulos_proveedores_ibfk_2` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id_proveedor`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `recetas_articulos`
+--
+ALTER TABLE `recetas_articulos`
+  ADD CONSTRAINT `recetas_articulos_ibfk_1` FOREIGN KEY (`id_receta`) REFERENCES `recetas` (`id_receta`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `recetas_articulos_ibfk_2` FOREIGN KEY (`id_articulo`) REFERENCES `articulos` (`id_articulo`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
