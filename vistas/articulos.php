@@ -24,6 +24,7 @@ include 'header.php'
                 <th>Stock máximo</th>
                 <th>Descripción</th>
                 <th>Estatus</th>
+                <th>Proveedor</th> 
             </tr>
         </thead>
 <?php foreach ($articulos as $articulo): ?>
