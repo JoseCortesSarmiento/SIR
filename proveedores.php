@@ -1,7 +1,7 @@
 <?php
-include 'config.php';
-include 'coneccion.php';
-include 'header.php'
+include 'global/config.php';
+include 'global/conexion.php';
+include 'global/header.php'
 ?>
 
 
@@ -48,7 +48,7 @@ include 'header.php'
         </tfoot> -->
     </table>
 <?php 
-    include "footer.php"
+    include "global/footer.php"
 ?>
 </body>
 </html>
