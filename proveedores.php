@@ -1,7 +1,9 @@
 <?php
 include 'global/config.php';
 include 'global/conexion.php';
-include 'global/header.php'
+include 'global/header.php';
+include 'addProveedor.php';
+
 ?>
 
 
@@ -9,7 +11,7 @@ include 'global/header.php'
 <?php
 $sentencia = $pdo->prepare('SELECT * FROM proveedores');
 $sentencia->execute();
-$articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+$proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <br />
 <br />  
@@ -28,25 +30,29 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
             <th>Acciones</th>
         </tr>
     </thead>
-    <?php foreach ($articulos as $articulo): ?>
+    <?php foreach ($proveedores as $proveedor): ?>
         <tr>
-            <td> <?=$articulo['nombre']?></td>
-            <td> <?=$articulo['correo']?></td>
-            <td> <?=$articulo['telefono']?></td>
-            <td> <?=$articulo['direccion']?></td>
+            <td> <?=$proveedor['nombre']?></td>
+            <td> <?=$proveedor['correo']?></td>
+            <td> <?=$proveedor['telefono']?></td>
+            <td> <?=$proveedor['direccion']?></td>
             <td>
             <span style="font-size: 32px; color: tomato;">
-                <i class="fas fa-trash-alt"></i>
+                <!-- <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalEditProveedores"> <i class="fas fa-trash-alt"></i></a> -->
             </span>
 
             <span style="font-size: 32px; color: darkturquoise;">
-                <i class="fas fa-edit"></i>
+                <a href="updateProveedores.php?id_proveedor=<?=$proveedor['id_proveedor']?>" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalEditProveedores"> <i class="fas fa-edit"></i></a>
             </span>
+
             
             </td>
         </tr>
     <?php endforeach; ?>
 </table>
+<div class="text-center">
+  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalAddProveedor">Agregar proveedor</a>
+</div>
 </div>  
 	</div> 
 <script>  
@@ -54,3 +60,7 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 		$('#proveedores').DataTable();  
 	}); 
 </script>  
+<?php 
+    include 'updateProveedores.php';
+    
+?>

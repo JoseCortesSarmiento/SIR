@@ -37,7 +37,6 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 						<th>Estatus</th>
                         <th>Proveedor</th>
                         <th>Acciones</th>
-                        
 					</tr>  
 				</thead>  
 				<?php foreach ($articulos as $articulo): ?>
