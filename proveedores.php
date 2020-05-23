@@ -25,6 +25,7 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
             <th>Correo</th>
             <th>Teléfono</th>
             <th>Dirección</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <?php foreach ($articulos as $articulo): ?>
@@ -33,6 +34,16 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
             <td> <?=$articulo['correo']?></td>
             <td> <?=$articulo['telefono']?></td>
             <td> <?=$articulo['direccion']?></td>
+            <td>
+            <span style="font-size: 32px; color: tomato;">
+                <i class="fas fa-trash-alt"></i>
+            </span>
+
+            <span style="font-size: 32px; color: darkturquoise;">
+                <i class="fas fa-edit"></i>
+            </span>
+            
+            </td>
         </tr>
     <?php endforeach; ?>
 </table>

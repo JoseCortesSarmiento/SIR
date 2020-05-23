@@ -36,6 +36,8 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 						<th>Descripción</th>
 						<th>Estatus</th>
                         <th>Proveedor</th>
+                        <th>Acciones</th>
+                        
 					</tr>  
 				</thead>  
 				<?php foreach ($articulos as $articulo): ?>
@@ -49,7 +51,17 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 						<td> <?=$articulo['stock_maximo']?></td>
 						<td> <?=$articulo['descripcion']?></td>
 						<td> <?=$articulo['estatus']?></td> 
-                        <td> <?=$articulo['proveedor']?></td>     
+                        <td> <?=$articulo['proveedor']?></td>  
+                        <td>
+                        <span style="font-size: 32px; color: tomato;">
+                            <i class="fas fa-trash-alt"></i>
+                        </span>
+
+                        <span style="font-size: 32px; color: darkturquoise;">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        
+                        </td>   
 					</tr>
 
 				<?php endforeach; ?>
