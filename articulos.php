@@ -5,7 +5,9 @@ include 'global/header.php'
 ?>
 
 <?php
-$sentencia = $pdo->prepare('SELECT * FROM articulos  ORDER BY id_articulo DESC');
+$sentencia = $pdo->prepare('SELECT a.nombre, a.precio, a.unidad_medida, a.stock_minimo, a.stock_almacenado, a.stock_maximo, a.descripcion, a.estatus, p.nombre as proveedor
+FROM articulos a, proveedores p, articulos_proveedores ap 
+WHERE a.id_articulo = ap.id_articulo and p.id_proveedor = ap.id_proveedor');
 $sentencia->execute();
 $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -33,6 +35,7 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 						<th>Stock máximo</th>
 						<th>Descripción</th>
 						<th>Estatus</th>
+                        <th>Proveedor</th>
 					</tr>  
 				</thead>  
 				<?php foreach ($articulos as $articulo): ?>
@@ -45,7 +48,8 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 						<td> <?=$articulo['stock_almacenado']?></td>
 						<td> <?=$articulo['stock_maximo']?></td>
 						<td> <?=$articulo['descripcion']?></td>
-						<td> <?=$articulo['estatus']?></td>   
+						<td> <?=$articulo['estatus']?></td> 
+                        <td> <?=$articulo['proveedor']?></td>     
 					</tr>
 
 				<?php endforeach; ?>
