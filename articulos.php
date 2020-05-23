@@ -22,7 +22,7 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 		<h3 align="center">Artículos</h3>  
 		<br />  
 		<div class="table-responsive">  
-			<table id="employee_data" class="table table-striped table-bordered">  
+			<table id="articulos" class="table table-striped table-bordered">  
 				<thead>  
 					<tr>  
 						<th>Nombre</th>
@@ -56,6 +56,6 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 </html>  
 <script>  
 	$(document).ready(function(){  
-		$('#employee_data').DataTable();  
+		$('#articulos').DataTable();  
 	}); 
 </script>  
