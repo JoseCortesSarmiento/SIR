@@ -61,23 +61,23 @@
        <form action="proveedores.php" method="post">
 
        <div class="md-form mb-5">
-          <input type="text" id="defaultForm-email" class="form-control validate" name="nombre" value="<?php echo !empty($nombre)?$nombre:'';?>">
+          <input type="text" id="defaultForm-email" class="form-control validate" name="nombre" >
           <label data-error="wrong" data-success="right" for="defaultForm-email">Nombre</label>
         </div>
 
         <div class="md-form mb-5">
-          <input type="email" id="defaultForm-email" class="form-control validate" name="correo" value="<?php echo !empty($correo)?$correo:'';?>">
+          <input type="email" id="defaultForm-email" class="form-control validate" name="correo" >
           <label data-error="wrong" data-success="right" for="defaultForm-email">Correo</label>
         </div>
 
         <div class="md-form mb-5">
-          <input type="text" id="defaultForm-email" class="form-control validate" name="telefono" value="<?php echo !empty($telefono)?$telefono:'';?>">
+          <input type="text" id="defaultForm-email" class="form-control validate" name="telefono" >
           <label data-error="wrong" data-success="right" for="defaultForm-email">Teléfono</label>
         </div>
 
 
         <div class="md-form mb-5">
-          <input type="text" id="defaultForm-email" class="form-control validate" name="direccion" value="<?php echo !empty($direccion)?$direccion:'';?>">
+          <input type="text" id="defaultForm-email" class="form-control validate" name="direccion" >
           <label data-error="wrong" data-success="right" for="defaultForm-email">Dirección</label>
         </div>
        
