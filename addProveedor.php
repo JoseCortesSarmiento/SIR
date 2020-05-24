@@ -10,7 +10,11 @@
 		
 			$sql = "INSERT INTO proveedores ( nombre, correo, telefono, direccion) values(?, ?, ?,?)";			
 			$stmt = $pdo->prepare($sql);
-			$stmt->execute([$nombre, $correo, $telefono, $direccion]);			
+            $stmt->execute([$nombre, $correo, $telefono, $direccion]);	
+            
+            echo '<script type="text/javascript">'; 
+            echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha agregado un nuevo proveedor","success");'; 
+            echo '}, 500);</script>'; 
 		
 	}
 ?>

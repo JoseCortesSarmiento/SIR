@@ -1,27 +1,39 @@
-<?php
+<?php 
+
 include 'global/config.php';
 include 'global/conexion.php';
 include 'global/header.php';
 include 'addArticulo.php';
 
+
+     if (isset($_GET["id_articulo"])) {
+        try {
+      
+          $id = $_GET["id_articulo"];
+      
+          $sql = "DELETE FROM articulos WHERE id_articulo = :id";
+      
+          $statement = $pdo->prepare($sql);
+          $statement->bindValue(':id', $id);
+          $statement->execute();
+      
+          echo '<script type="text/javascript">'; 
+            echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha borrado el articulo","success");'; 
+            echo '}, 500);</script>'; 
+
+           
+        } 
+        catch(PDOException $error) {
+          echo $sql . "<br>" . $error->getMessage();
+        }
+      }
+      
+      
+
 ?>
 
 
-<?php
-$sentencia = $pdo->prepare('SELECT a.id_articulo, a.nombre, a.precio, a.unidad_medida, a.stock_minimo, a.stock_almacenado, a.stock_maximo, a.descripcion, a.estatus, p.nombre as proveedor
-FROM articulos a, proveedores p, articulos_proveedores ap 
-WHERE a.id_articulo = ap.id_articulo and p.id_proveedor = ap.id_proveedor');
-$sentencia->execute();
-$articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
-?>
 
-
-<!DOCTYPE html>  
-<html>  
-<head>  
-	<title>Artículos</title>  
-</head>  
-<body>  
 	<br /><br />  
 	<div class="container">  
 		<h3 align="center">Artículos</h3>  
@@ -71,10 +83,6 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
 				<?php endforeach; ?>
 			</table>  
-
-            <div class="text-center">
-  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalAddArticulo">Agregar articulo</a>
-</div>
 		</div>  
 	</div>  
 </body>  
