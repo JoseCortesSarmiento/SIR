@@ -3,7 +3,7 @@ include 'global/config.php';
 include 'global/conexion.php';
 include 'global/header.php';
 include 'addProveedor.php';
-include 'updateProveedores.php';
+// include 'updateProveedores.php';
     
 ?>
 
