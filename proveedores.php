@@ -3,7 +3,8 @@ include 'global/config.php';
 include 'global/conexion.php';
 include 'global/header.php';
 include 'addProveedor.php';
-
+include 'updateProveedores.php';
+    
 ?>
 
 
@@ -43,7 +44,7 @@ $proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
             </span>
 
             <span style="font-size: 32px; color: tomato;">
-                <a href="" class="btn btn-red btn-rounded mb-4" > <i class="fas fa-trash-alt"></i></a>
+                <a href="deleteProveedor.php?id_proveedor=<?=$proveedor['id_proveedor']?>" class="btn btn-red btn-rounded mb-4" > <i class="fas fa-trash-alt"></i></a>
             </span>  
             </td>
         </tr>
@@ -59,7 +60,3 @@ $proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 		$('#proveedores').DataTable();  
 	}); 
 </script>  
-<?php 
-    include 'updateProveedores.php';
-    
-?>

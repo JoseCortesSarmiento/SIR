@@ -1,14 +1,4 @@
 <?php 
-// include 'global/config.php';
-// include 'global/conexion.php';
-// include 'global/header.php';
-
-		// $f_idError = null;
-		// $submError = null;
-		// $marcError = null;
-		// $acError   = null;
-		
-        
 
 	if ( !empty($_POST)) {
 		
@@ -18,25 +8,6 @@
 		$telefono = $_POST['telefono'];
 		$direccion   = $_POST['direccion'];
 		
-		// validate input
-		// $valid = true;
-		
-		// if (empty($subm)) {
-		// 	$submError = 'Porfavor escribe una submarca';
-		// 	$valid = false;
-		// }
-		// if (empty($marc)) {
-		// 	$marcError = 'Porfavor selecciona una marca';
-		// 	$valid = false;
-		// }
-		// if (empty($ac)) {
-		// 	$acError = 'Porfavor seleccione si el vehículo tiene aire acondicionado';
-		// 	$valid = false;
-		// }				
-		
-        // insert data
-
-//   
 			$sql = "INSERT INTO proveedores ( nombre, correo, telefono, direccion) values(?, ?, ?,?)";			
 			$stmt = $pdo->prepare($sql);
 			$stmt->execute([$nombre, $correo, $telefono, $direccion]);			
@@ -81,11 +52,6 @@
           <label data-error="wrong" data-success="right" for="defaultForm-email">Dirección</label>
         </div>
        
-       
-       
-       
-
-
       </div>
       <div class="modal-footer d-flex justify-content-center">
         <button type="submit"  class="btn btn-default">Agregar</button>
