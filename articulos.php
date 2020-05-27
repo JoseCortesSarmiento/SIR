@@ -65,7 +65,6 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                             <a href="deleteArticulo.php?id_articulo=<?=$articulo['id_articulo']?>" class="btn btn-red btn-rounded mb-4" > <i class="fas fa-trash-alt"></i></a>
                         </span>  
                        
-                        
                         </td>   
 					</tr>
 

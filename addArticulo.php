@@ -11,11 +11,13 @@
     $stock_maximo = $_POST['stock_maximo'];
     $descripcion = $_POST['descripcion'];
     $estatus = $_POST['estatus'];
-    $proveedor   = $_POST['proveedor'];
+    // $proveedor   = $_POST['proveedor'];
 		
-			$sql = "INSERT INTO proveedores ( nombre, precio, unidad_medida, stock_minimo, stock_almacenado, stock_maximo,descripcion, estatus, proveedor) values(?, ?, ?, ? ,?, ?, ?, ?,?)";			
+      $sql = "INSERT INTO articulos ( nombre, precio, unidad_medida, stock_minimo, stock_almacenado, stock_maximo,descripcion, estatus) values(?, ?, ?, ? ,?, ?, ?, ?)";	
+  
+      $ingPro = $pdo->prepare("INSERT INTO articulos_proveedores (id_articulo, id_proveedor) VALUES(:");		
 			$stmt = $pdo->prepare($sql);
-            $stmt->execute([$nombre, $precio, $unidad_medida, $stock_minimo, $stock_almacenado,$stock_maximo, $descripcion, $estatus, $proveedor]);	
+            $stmt->execute([$nombre, $precio, $unidad_medida, $stock_minimo, $stock_almacenado,$stock_maximo, $descripcion, $estatus]);	
             
             echo '<script type="text/javascript">'; 
             echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha agregado un nuevo articulo","success");'; 
@@ -41,60 +43,65 @@
        <form action="articulos.php" method="post">
 
        <div class="md-form mb-5">
-          <input type="text" id="defaultForm-email" class="form-control validate" name="nombre" >
+          <input type="text"  class="form-control validate" name="nombre" >
           <label data-error="wrong" data-success="right" >Nombre</label>
         </div>
 
         <div class="md-form mb-5">
-          <input type="text" id="defaultForm-email" class="form-control validate" name="precio" >
+          <input type="text"  class="form-control validate" name="precio" >
           <label data-error="wrong" data-success="right" >Precio</label>
         </div>
 
         <div class="md-form mb-5">
-          <input type="text" id="defaultForm-email" class="form-control validate" name="unidad_medida" >
+          <input type="text"  class="form-control validate" name="unidad_medida" >
           <label data-error="wrong" data-success="right" >Unidad medida</label>
         </div>
 
 
         <div class="md-form mb-5">
-          <input type="text" id="defaultForm-email" class="form-control validate" name="stock_minimo" >
+          <input type="text"  class="form-control validate" name="stock_minimo" >
           <label data-error="wrong" data-success="right" >Stock minimo</label>
         </div>
 
         <div class="md-form mb-5">
-          <input type="text" id="defaultForm-email" class="form-control validate" name="stock_almacenado" >
+          <input type="text"  class="form-control validate" name="stock_almacenado" >
           <label data-error="wrong" data-success="right">Stock almacenado</label>
         </div>
 
         <div class="md-form mb-5">
-          <input type="text" id="defaultForm-email" class="form-control validate" name="stock_maximo" >
+          <input type="text"  class="form-control validate" name="stock_maximo" >
           <label data-error="wrong" data-success="right" for="defaultForm-email">Stock maximo</label>
         </div>
 
         <div class="md-form mb-5">
-          <input type="text" id="defaultForm-email" class="form-control validate" name="descripcion" >
+          <input type="text" class="form-control validate" name="descripcion" >
           <label data-error="wrong" data-success="right" >Descripción</label>
         </div>
 
 
         <div class="md-form mb-5">
-          <input type="text" id="defaultForm-email" class="form-control validate" name="estatus" >
+          <input type="text"  class="form-control validate" name="estatus" >
           <label data-error="wrong" data-success="right" >Estatus</label>
-        </div>
+        </div> 
 
-        <div class="md-form mb-5">
-        <select class="mdb-select colorful-select dropdown-primary">
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-                <option value="4">Option 4</option>
-                <option value="5">Option 5</option>
-            </select>
-            <label>Blue select</label>
-          <label data-error="wrong" data-success="right" >Estatus</label>
-        </div>
-       
+         <div class="md-form mb-5">
+        <select class="browser-default custom-select" name="proveedor">
+            <option selected>Elija un proveedor</option>
+            <?php 
+					   						 
+					   						$query = 'SELECT * FROM proveedores'; 
+	 				   						foreach ($pdo->query($query) as $row) { 
+	 				   							if ($row['id_categoria']==$id_proveedor) 
+                        	   						echo "<option selected value='" . $row['id_proveedor'] . "'>" . $row['nombre'] . "</option>"; 
+                        	   					else 
+                        	   						echo "<option value='" . $row['id_categoria'] . "'>" . $row['nombre'] . "</option>"; 
+					   						} 
+					   						 
+					  ?> 
+      </select>
+        
       </div>
+
       <div class="modal-footer d-flex justify-content-center">
         <button type="submit"  class="btn btn-default">Agregar</button>
       </div>
@@ -102,4 +109,5 @@
       </form>
     </div>
   </div>
+</div>
 </div>
