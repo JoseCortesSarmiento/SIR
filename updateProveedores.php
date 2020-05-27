@@ -2,19 +2,16 @@
 
 include 'global/config.php';
 include 'global/conexion.php';
-include 'templates/head.php';
-include 'global/sesion.php';
 include 'global/header.php';
 
 
 
 if (!empty($_GET['id_proveedor'])) { 
     $id_proveedor = $_REQUEST['id_proveedor']; 
-     echo $id_proveedor;
+    //  echo $id_proveedor;
 } 
  
 if (!empty($_POST)) { 
-    // keep track validation errors 
    
     $nombre = $_POST['nombre']; 
     $correo= $_POST['correo']; 
@@ -22,19 +19,10 @@ if (!empty($_POST)) {
     $direccion = $_POST['direccion']; 
     $id_proveedor = $_POST['id_proveedor']; 
     
-
-    
- 
- 
-     
-    // update data 
-   
         
         try{ 
             $pdo->beginTransaction(); 
-            $sql2 = "UPDATE proveedores set  nombre = :nombre, correo=:correo, telefono=:telefono, direccion=:direccion  
-            WHERE id_proveedor = :id_proveedor"; 
-            
+            $sql2 = "UPDATE proveedores set  nombre = :nombre, correo=:correo, telefono=:telefono, direccion=:direccion  WHERE id_proveedor = :id_proveedor"; 
             $stmt = $pdo->prepare($sql2); 
             $stmt->execute(['nombre'=>$nombre, 'correo'=>$correo, 'direccion'=>$direccion,'telefono'=>$telefono, 'id_proveedor'=>$id_proveedor ]); 
             // $stmt->debugDumpParams(); 
