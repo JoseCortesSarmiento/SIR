@@ -1,4 +1,7 @@
 <?php
+define("KEY", "sistemarest");
+define("COD", "AES-128-ECB");
+
 //MYSQL
 define ("DATABASE_HOST", "localhost");
 define ("DATABASE_USER", "root");

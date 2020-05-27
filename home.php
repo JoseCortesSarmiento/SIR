@@ -18,5 +18,5 @@ error_reporting(E_ALL);
 
 
 
-echo "Historial";
+echo "Home";
 ?>

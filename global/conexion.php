@@ -12,6 +12,7 @@ function pdo_connect_mysql() {
     	return new PDO('mysql:host=' . DATABASE_HOST . ';dbname=' . DATABASE_NAME . ';charset=utf8', DATABASE_USER, DATABASE_PASS, [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::MYSQL_ATTR_INIT_COMMAND=>"SET NAMES utf8",
             PDO::ATTR_EMULATE_PREPARES => false
           ]);
     } catch (PDOException $exception) {
@@ -22,7 +23,7 @@ function pdo_connect_mysql() {
 
 $pdo = pdo_connect_mysql();
 if($pdo){
-  echo "Connected to the <strong>$db</strong> PGSQL database successfully!";
+  //echo "Connected to the <strong>$db</strong> PGSQL database successfully!";
   }
 
 
@@ -37,7 +38,7 @@ try{
  
  // display a message if connected to the PostgreSQL successfully
  if($conn){
- echo "Connected to the <strong>$db</strong> MYSQL database successfully!";
+ //echo "Connected to the <strong>$db</strong> MYSQL database successfully!";
  }
 }catch (PDOException $e){
  // report error message
