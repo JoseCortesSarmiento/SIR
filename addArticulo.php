@@ -11,18 +11,22 @@
     $stock_maximo = $_POST['stock_maximo'];
     $descripcion = $_POST['descripcion'];
     $estatus = $_POST['estatus'];
-    // $proveedor   = $_POST['proveedor'];
+    $id_proveedor   = $_POST['proveedor'];
 		
       $sql = "INSERT INTO articulos ( nombre, precio, unidad_medida, stock_minimo, stock_almacenado, stock_maximo,descripcion, estatus) values(?, ?, ?, ? ,?, ?, ?, ?)";	
-  
-      $ingPro = $pdo->prepare("INSERT INTO articulos_proveedores (id_articulo, id_proveedor) VALUES(:");		
-			$stmt = $pdo->prepare($sql);
-            $stmt->execute([$nombre, $precio, $unidad_medida, $stock_minimo, $stock_almacenado,$stock_maximo, $descripcion, $estatus]);	
-            
+      $stmt = $pdo->prepare($sql);
+
+      $sql2 = "INSERT INTO articulos_proveedores (id_articulo, id_proveedor) VALUES(?,?)";
+      $stmt2 = $pdo->prepare($sql2);
+
+
+      $stmt->execute([$nombre, $precio, $unidad_medida, $stock_minimo, $stock_almacenado,$stock_maximo, $descripcion, $estatus]);	
+      $articuloId=$pdo->lastInsertId();
+      echo $id_proveedor;
+      $stmt2->execute([$articuloId, $id_proveedor]);
             echo '<script type="text/javascript">'; 
             echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha agregado un nuevo articulo","success");'; 
             echo '}, 500);</script>'; 
-		
 	}
 ?>
 
@@ -91,10 +95,9 @@
 					   						 
 					   						$query = 'SELECT * FROM proveedores'; 
 	 				   						foreach ($pdo->query($query) as $row) { 
-	 				   							if ($row['id_categoria']==$id_proveedor) 
+	 	
                         	   						echo "<option selected value='" . $row['id_proveedor'] . "'>" . $row['nombre'] . "</option>"; 
-                        	   					else 
-                        	   						echo "<option value='" . $row['id_categoria'] . "'>" . $row['nombre'] . "</option>"; 
+                        	   				
 					   						} 
 					   						 
 					  ?> 
