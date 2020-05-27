@@ -5,9 +5,8 @@ error_reporting(E_ALL);
 
 include 'global/config.php';
 include 'global/conexion.php';
-include 'templates/head.php';
 include 'global/sesion.php';
-include 'global/header.php';
+include 'templates/head.php';
 include 'addUsuario.php';
 ?>
 

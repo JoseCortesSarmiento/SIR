@@ -20,7 +20,15 @@ include 'global/header.php';
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#">Usuarios</a>
+        <a class="nav-link" href="usuarios.php">Usuarios</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="proveedores.php">Proveedores</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="articulos.php">Articulos</a>
       </li>
     </ul>
 

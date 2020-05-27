@@ -1,9 +1,9 @@
 <?php  
 
 include 'global/config.php';
+include 'templates/head.php';
 include 'global/conexion.php';
-include 'global/header.php';
-
+include 'global/sesion.php';
 
 
 if (!empty($_GET['id_proveedor'])) { 

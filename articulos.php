@@ -60,7 +60,7 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                         <td>
 
                         <span style="font-size: 32px; color: darkturquoise;">
-                            <a href="updateArticulo.php?id_articulo=<?=$articulo['id_articulo']?>"class="btn btn-default btn-rounded mb-4"  data-toggle="modal" data-target="#modalEditArticulo"> <i class="fas fa-edit"></i></a>
+                            <a href="updateArticulos.php?id_articulo=<?=$articulo['id_articulo']?>"class="btn btn-default btn-rounded mb-4" > <i class="fas fa-edit"></i></a>
                         </span>
 
                         <span style="font-size: 32px; color: tomato;">
