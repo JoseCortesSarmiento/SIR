@@ -38,18 +38,24 @@ $proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
             <td>
 
             <span style="font-size: 32px; color: darkturquoise;">
-                <a href="updateProveedores.php?id_proveedor=<?=$proveedor['id_proveedor']?>"class="btn btn-default btn-rounded mb-4"  > <i class="fas fa-edit"></i></a>
+                <a href="updateProveedores.php?id_proveedor=
+                <?=$proveedor['id_proveedor']?>"
+                class="btn btn-default btn-rounded mb-4"  > 
+                <i class="fas fa-edit"></i></a>
             </span>
 
             <span style="font-size: 32px; color: tomato;">
-                <a href="deleteProveedor.php?id_proveedor=<?=$proveedor['id_proveedor']?>" class="btn btn-red btn-rounded mb-4" > <i class="fas fa-trash-alt"></i></a>
+                <a href="deleteProveedor.php?id_proveedor=<?=$proveedor['id_proveedor']?>" 
+                class="btn btn-red btn-rounded mb-4" > 
+                <i class="fas fa-trash-alt"></i></a>
             </span>  
             </td>
         </tr>
     <?php endforeach; ?>
 </table>
 <div class="text-center">
-  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalAddProveedor">Agregar proveedor</a>
+  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" 
+  data-target="#modalAddProveedor">Agregar proveedor</a>
 </div>
 </div>  
 	</div> 
@@ -60,9 +66,3 @@ $proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 </script>  
 
 
-
-
-<?php 
-
-    
-?>

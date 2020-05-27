@@ -30,7 +30,9 @@ if (!empty($_POST)) {
         
         try{ 
             $pdo->beginTransaction(); 
-            $sql2 = "UPDATE proveedores set  nombre = :nombre, correo=:correo, telefono=:telefono, direccion=:direccion  WHERE id_proveedor = :id_proveedor"; 
+            $sql2 = "UPDATE proveedores set  nombre = :nombre, correo=:correo, telefono=:telefono, direccion=:direccion  
+            WHERE id_proveedor = :id_proveedor"; 
+            
             $stmt = $pdo->prepare($sql2); 
             $stmt->execute(['nombre'=>$nombre, 'correo'=>$correo, 'direccion'=>$direccion,'telefono'=>$telefono, 'id_proveedor'=>$id_proveedor ]); 
             // $stmt->debugDumpParams(); 

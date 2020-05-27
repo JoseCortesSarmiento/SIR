@@ -1,9 +1,12 @@
 <?php
+require_once 'config.php';
+
 //Mostrar errores en linux
 ini_set("display_errors", "1");
 error_reporting(E_ALL);
 
-/*
+
+//MYSQL
 function pdo_connect_mysql() {
     try {
     	return new PDO('mysql:host=' . DATABASE_HOST . ';dbname=' . DATABASE_NAME . ';charset=utf8', DATABASE_USER, DATABASE_PASS, [
@@ -17,9 +20,14 @@ function pdo_connect_mysql() {
     }
 }
 
-$pdo = pdo_connect_mysql();*/
+$pdo = pdo_connect_mysql();
+if($pdo){
+  echo "Connected to the <strong>$db</strong> PGSQL database successfully!";
+  }
 
-require_once 'config.php';
+
+//POSTGRESQL
+
  
 $dsn = "pgsql:host=$host;port=5432;dbname=$db;user=$username;password=$password";
  
@@ -29,7 +37,7 @@ try{
  
  // display a message if connected to the PostgreSQL successfully
  if($conn){
- echo "Connected to the <strong>$db</strong> database successfully!";
+ echo "Connected to the <strong>$db</strong> MYSQL database successfully!";
  }
 }catch (PDOException $e){
  // report error message
