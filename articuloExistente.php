@@ -4,7 +4,7 @@ include 'global/config.php';
 include 'global/conexion.php';
 include 'templates/head.php';
 include 'global/sesion.php';
-include 'global/header.php';
+
 
 if ( !empty($_POST)) {
   
@@ -22,7 +22,9 @@ if ( !empty($_POST)) {
     $stmt2->execute([$id_articulo, $id_proveedor, $precio]);
     echo '<script type="text/javascript">'; 
     echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha agregado un nuevo articulo","success");'; 
-    echo '}, 500);</script>'; 
+    echo '}, 500);</script>';
+    
+    header('location: articulos.php');
 }
 
 ?>
