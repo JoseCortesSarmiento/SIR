@@ -14,7 +14,6 @@ if (!empty($_GET['id_articulo'])) {
 if (!empty($_POST)) { 
    
     $nombre = $_POST['nombre']; 
-    $precio= $_POST['precio']; 
     $unidad_medida= $_POST['unidad_medida']; 
     $stock_minimo = $_POST['stock_minimo']; 
     $stock_almacenado = $_POST['stock_almacenado']; 
@@ -26,9 +25,9 @@ if (!empty($_POST)) {
         
         try{ 
             $pdo->beginTransaction(); 
-            $sql2 = "UPDATE articulos set nombre = :nombre, precio=:precio, unidad_medida=:unidad_medida, stock_minimo=:stock_minimo, stock_maximo=:stock_maximo,stock_almacenado=:stock_almacenado, descripcion=:descripcion, estatus=:estatus WHERE id_articulo = :id_articulo"; 
+            $sql2 = "UPDATE articulos set nombre = :nombre,  unidad_medida=:unidad_medida, stock_minimo=:stock_minimo, stock_maximo=:stock_maximo,stock_almacenado=:stock_almacenado, descripcion=:descripcion, estatus=:estatus WHERE id_articulo = :id_articulo"; 
             $stmt = $pdo->prepare($sql2); 
-            $stmt->execute(['nombre'=>$nombre, 'precio'=>$precio, 'unidad_medida'=>$unidad_medida,'stock_minimo'=>$stock_minimo, 'stock_maximo'=>$stock_maximo, 'stock_almacenado'=>$stock_almacenado, 'descripcion'=>$descripcion, 'estatus'=>$estatus, 'id_articulo'=>$id_articulo ]); 
+            $stmt->execute(['nombre'=>$nombre,  'unidad_medida'=>$unidad_medida,'stock_minimo'=>$stock_minimo, 'stock_maximo'=>$stock_maximo, 'stock_almacenado'=>$stock_almacenado, 'descripcion'=>$descripcion, 'estatus'=>$estatus, 'id_articulo'=>$id_articulo ]); 
             // $stmt->debugDumpParams(); 
             echo '<script type="text/javascript">'; 
             echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha actualizado el producto","success");'; 
@@ -56,7 +55,6 @@ else {
     $data = $q->fetch(PDO::FETCH_ASSOC); 
     $id_articulo=$data['id_articulo'];
     $nombre = $data['nombre']; 
-    $precio = $data['precio'];
     $unidad_medida = $data['unidad_medida'];
     $stock_minimo   = $data['stock_minimo'];
     $stock_almacenado   = $data['stock_almacenado'];
@@ -85,10 +83,6 @@ else {
           <label data-error="wrong" data-success="right" >Nombre</label>
         </div>
 
-        <div class="md-form mb-5">
-          <input type="text"  class="form-control validate" name="precio" value="<?php echo !empty($precio)?$precio:''; ?>" >
-          <label data-error="wrong" data-success="right" >Precio</label>
-        </div>
 
         <div class="md-form mb-5">
           <input type="text"  class="form-control validate" name="unidad_medida" value="<?php echo !empty($unidad_medida)?$unidad_medida:''; ?>">
