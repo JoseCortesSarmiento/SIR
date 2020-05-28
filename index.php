@@ -18,7 +18,7 @@ if(isset($_POST["btnLogin"])){
     $txtEmail = ($_POST['txtEmail']);
     $txtPassword = ($_POST['txtPassword']);
 }
-$sentencia = $conn->prepare('SELECT * FROM usuarios WHERE correo = :correo AND contra = :contra'); //query
+$sentencia = $conn->prepare('SELECT * FROM usuarios WHERE correo = :correo AND contra = crypt(:contra, contra)');
 
 $sentencia->bindParam("correo", $txtEmail, PDO::PARAM_STR); //enviamos informacion a traves del correo y password
 $sentencia->bindParam("contra", $txtPassword, PDO::PARAM_STR); //PDO::PARAM_STR enviamos informacion en formato string
