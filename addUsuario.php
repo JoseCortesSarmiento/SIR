@@ -11,8 +11,8 @@ error_reporting(E_ALL);
 		$nombre = $_POST['nombre'];
         $estatus = $_POST['estatus'];
         $rol = $_POST['rol'];
-		
-			$sql = "INSERT INTO usuarios ( correo, contra, nombre, estatus, rol) values(?, ?, ?, ?, ?)";			
+        
+        $sql = "INSERT INTO usuarios ( correo, contra, nombre, estatus, rol) values(?, crypt(?, gen_salt('md5')), ?, ?, ?)";
 			$stmt = $conn->prepare($sql);
             $stmt->execute([$correo, $contra, $nombre, $estatus, $rol]);	
             

@@ -24,15 +24,7 @@ if (!empty($_POST)) {
     $estatus = $_POST['estatus']; 
     $rol = $_POST['rol']; 
     $id_usuario = $_POST['id_usuario']; 
-    
-
-    
- 
- 
-     
     // update data 
-   
-        
         try{ 
             $conn->beginTransaction(); 
 
@@ -43,6 +35,7 @@ if (!empty($_POST)) {
                 . 'estatus = :estatus, '
                 . 'rol = :rol '
                 . 'WHERE id_usuario = :id_usuario';
+
 
             $stmt = $conn->prepare($sql2); 
             $stmt->execute(['correo'=>$correo, 'contra'=>$contra, 'nombre'=>$nombre,'estatus'=>$estatus, 'rol'=>$rol,'id_usuario'=>$id_usuario]); 
