@@ -20,6 +20,7 @@ if (!empty($_POST)) {
     $stock_almacenado = $_POST['stock_almacenado']; 
     $stock_maximo = $_POST['stock_maximo']; 
     $descripcion = $_POST['descripcion']; 
+    $estatus = $_POST['estatus']; 
     $id_articulo = $_POST['id_articulo']; 
     
         

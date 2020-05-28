@@ -1,4 +1,5 @@
 <?php 
+// include 'articuloExistente.php';
 
 	if ( !empty($_POST)) {
 		
@@ -13,17 +14,17 @@
     $estatus = $_POST['estatus'];
     $id_proveedor   = $_POST['proveedor'];
 		
-      $sql = "INSERT INTO articulos ( nombre, precio, unidad_medida, stock_minimo, stock_almacenado, stock_maximo,descripcion, estatus) values(?, ?, ?, ? ,?, ?, ?, ?)";	
+      $sql = "INSERT INTO articulos ( nombre, unidad_medida, stock_minimo, stock_almacenado, stock_maximo,descripcion, estatus) values( ?, ?, ? ,?, ?, ?, ?)";	
       $stmt = $pdo->prepare($sql);
 
-      $sql2 = "INSERT INTO articulos_proveedores (id_articulo, id_proveedor) VALUES(?,?)";
+      $sql2 = "INSERT INTO articulos_proveedores (id_articulo, id_proveedor, precio) VALUES(?,?,?)";
       $stmt2 = $pdo->prepare($sql2);
 
 
-      $stmt->execute([$nombre, $precio, $unidad_medida, $stock_minimo, $stock_almacenado,$stock_maximo, $descripcion, $estatus]);	
+      $stmt->execute([$nombre, $unidad_medida, $stock_minimo, $stock_almacenado,$stock_maximo, $descripcion, $estatus]);	
       $articuloId=$pdo->lastInsertId();
       echo $id_proveedor;
-      $stmt2->execute([$articuloId, $id_proveedor]);
+      $stmt2->execute([$articuloId, $id_proveedor, $precio]);
             echo '<script type="text/javascript">'; 
             echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha agregado un nuevo articulo","success");'; 
             echo '}, 500);</script>'; 
@@ -42,10 +43,12 @@
         </button>
       </div>
 
+
       <div class="modal-body mx-3">
 
        <form action="articulos.php" method="post">
 
+      
        <div class="md-form mb-5">
           <input type="text"  class="form-control validate" name="nombre" >
           <label data-error="wrong" data-success="right" >Nombre</label>
