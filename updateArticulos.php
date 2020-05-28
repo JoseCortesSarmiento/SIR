@@ -69,7 +69,9 @@ else {
 
         
 
- <div class="card" style="width: 50rem;">
+<div class="container">
+
+<div class="card" style="width: 50rem;">
         <div class="card-body">
             <div class="md-form mb-5">
 
@@ -129,6 +131,9 @@ else {
             </div>
         </div>
  </div>
+
+
+</div>
 
      
     
