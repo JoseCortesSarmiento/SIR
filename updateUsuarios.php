@@ -28,14 +28,7 @@ if (!empty($_POST)) {
         try{ 
             $conn->beginTransaction(); 
 
-            $sql2 = 'UPDATE usuarios '
-                . 'SET correo = :correo, '
-                . 'contra = :contra, '
-                . 'nombre = :nombre, '
-                . 'estatus = :estatus, '
-                . 'rol = :rol '
-                . 'WHERE id_usuario = :id_usuario';
-
+            $sql2 = "UPDATE usuarios SET correo = :correo, contra = crypt(:contra, gen_salt('md5')), nombre = :nombre, estatus = :estatus, rol = :rol WHERE id_usuario = :id_usuario";
 
             $stmt = $conn->prepare($sql2); 
             $stmt->execute(['correo'=>$correo, 'contra'=>$contra, 'nombre'=>$nombre,'estatus'=>$estatus, 'rol'=>$rol,'id_usuario'=>$id_usuario]); 
