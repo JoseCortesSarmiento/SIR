@@ -30,5 +30,5 @@ include 'global/sesion.php';
       }
       
       
-	//    header('location: recetas.php');
+	   header('location: recetas.php');
 ?>

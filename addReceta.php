@@ -14,6 +14,7 @@ include 'global/header.php';
 
 
 if ( !empty($_POST)) {
+    
 		
     // keep track post values		
     $nombre = $_POST['nombre'];
@@ -28,17 +29,21 @@ if ( !empty($_POST)) {
     echo $categoria;
     echo $presentacion;
 
+
+    
+
     try{
         $pdo->beginTransaction(); 
         $sql = "INSERT INTO recetas (nombre_platillo, foto_receta, categoria,  presentacion, mise_en_place, preparacion) values(?, ?, ?, ?,?,?)";
-        $stmt = $conn->prepare($sql);
-        
+        $stmt = $pdo->prepare($sql);
         $stmt->execute([$nombre, $foto_receta, $categoria,  $presentacion, $mise_en_place, $preparacion]);
         $pdo->commit(); 
 
         echo '<script type="text/javascript">'; 
         echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha agregado una nueva receta '.$nombre.'","success");'; 
         echo '}, 500);</script>'; 
+        $arr = $stmt->errorInfo();
+        print_r($arr);
 
     }
 
@@ -61,10 +66,10 @@ if ( !empty($_POST)) {
         <label data-error="wrong" data-success="right" >Nombre platillo</label>
     </div>
 
-    <div class="md-form mb-5">
+    <!-- <div class="md-form mb-5">
             <input type="text"  class="form-control validate" disabled value=10>
             <label data-error="wrong" data-success="right">Codigo</label>
-    </div>
+    </div> -->
     <div class="text-left">       
           <div class="md-form mb-5">
             <select class="browser-default custom-select" name="categoria">
@@ -78,10 +83,10 @@ if ( !empty($_POST)) {
           </div>
 
 
-          <div class="md-form mb-5">
+          <!-- <div class="md-form mb-5">
             <input type="text" class="form-control validate"  disabled value=1>
             <label data-error="wrong" data-success="right">Rendimiento</label>
-          </div>
+          </div> -->
           
 
          

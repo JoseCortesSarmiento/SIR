@@ -12,6 +12,10 @@ include 'global/sesion.php';
     $sentencia = $pdo->prepare('SELECT * FROM recetas');
     $sentencia->execute();
     $recetas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+    echo "hola";
+    $arr = $sentencia->errorInfo();
+    print_r($arr);
 ?>
 <br />
 <br />  
