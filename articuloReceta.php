@@ -40,15 +40,16 @@ $id_receta=$_SESSION['receta'];
 
 
 
-if ( !empty($_POST['id_articulo'])||!empty($_POST['gramaje'] )) {
+if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
     
 		
     // keep track post values		
     $gramaje = $_POST['gramaje'];
-    $id_articulo =$_POST['id_articulo'];
+    $id_articulos_proveedores =$_POST['id_articulos_proveedores'];
 
+    
     echo "El gramaje es".$gramaje;
-    echo "El id del articulo es".$id_articulo;
+    // echo "El id del articulo es".$id_articulo;
 
 
    
@@ -56,9 +57,9 @@ if ( !empty($_POST['id_articulo'])||!empty($_POST['gramaje'] )) {
 
     try{
         $pdo->beginTransaction(); 
-        $sql = "INSERT INTO recetas_articulos (id_articulo,id_receta,gramaje) values(?, ?, ?)";
+        $sql = "INSERT INTO recetas_articulos (id_articulos_proveedores,id_receta,gramaje) values(?, ?, ?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$id_articulo, $id_receta, $gramaje]);
+        $stmt->execute([$id_articulos_proveedores, $id_receta, $gramaje]);
         // echo $id_receta;
         echo $gramaje;
         $pdo->commit(); 
@@ -102,6 +103,7 @@ if ( !empty($_POST['id_articulo'])||!empty($_POST['gramaje'] )) {
 						<th>Proveedor</th>
                         <th>Precio</th>
                         <th>Gramaje</th>
+                        <th>ID articulos_proveedores</th>
                         <th>Seleccionar</th>
 					</tr>  
 				</thead>  
@@ -111,10 +113,11 @@ if ( !empty($_POST['id_articulo'])||!empty($_POST['gramaje'] )) {
 						<td> <?=$articulo['proveedor']?></td>
 						<td> <?=$articulo['precio']?></td>
                         <td> <input type="text" name="gramaje" ></td>
+                        <td><?=$articulo['id_articulos_proveedores']?></td>
                         <td>
                         <div class="custom-control custom-radio">
                             <!-- <input type="radio" class="custom-control-input"  name="id_articulo" > -->
-                            <input type="radio" name="id_articulo" value="<?=$articulo['id_articulo']?>">Seleccionar
+                            <input type="radio" name="id_articulos_proveedores" value="<?=$articulo['id_articulos_proveedores']?>">Seleccionar
                             <!-- <label class="custom-control-label" for="defaultUnchecked">Default unchecked</label> -->
                         </div>
                         </td>

@@ -19,12 +19,11 @@ $q->execute(array($id_receta));
 $receta = $q->fetch(PDO::FETCH_ASSOC); 
 
 
-$sql2 = "SELECT a.nombre, a.unidad_medida, ap.precio, ra.gramaje from articulos_proveedores ap,  articulos a, recetas r, recetas_articulos ra where  ra.id_receta = ? AND a.id_articulo = ra.id_articulo";
-$sql3="SELECT a.nombre, a.unidad_medida from  articulos a, recetas r, recetas_articulos ra WHERE  ra.id_receta = ? AND a.id_articulo = ra.id_articulo";
 
-$sql4="SELECT a.nombre,ra.gramaje, a.unidad_medida
-FROM articulos a, recetas_articulos ra, recetas r
-WHERE r.id_receta=? AND ra.id_receta=r.id_receta AND ra.id_articulo=a.id_articulo";
+
+$sql4="SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio
+FROM articulos a, recetas_articulos ra, recetas r, articulos_proveedores ap
+WHERE r.id_receta=? AND ra.id_receta=r.id_receta AND ra.id_articulos_proveedores=ap.id_articulos_proveedores AND ap.id_articulo=a.id_articulo";
 
 $q=$pdo->prepare($sql4);
 $q->execute(array($id_receta));
@@ -90,6 +89,7 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
 						<th>Nombre</th>
 						<th>Gramaje</th>
 						<th>Unidad medida</th>
+                        <th>Precio</th>
 					</tr>  
 				</thead>  
 				 <?php foreach ($articulos as $articulo): ?> 
@@ -98,6 +98,7 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
 						<td> <?=$articulo['nombre']?></td>
 						<td> <?=$articulo['gramaje']?></td>
 						<td> <?=$articulo['unidad_medida']?></td>
+                        <td> <?=$articulo['precio']?></td>
 					</tr>
 
 				<?php endforeach; ?> 
