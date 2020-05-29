@@ -11,10 +11,16 @@ WHERE a.id_articulo = ap.id_articulo and p.id_proveedor = ap.id_proveedor');
 $sentencia->execute();
 $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
-print_r($_SESSION['receta']);
+
+
+
+
+
+
+// print_r($_SESSION['receta']);
 
 $id_receta=$_SESSION['receta'];
-echo $id_receta;
+// echo $id_receta;
 
 
 
@@ -34,14 +40,15 @@ echo $id_receta;
 
 
 
-if ( !empty($_POST)) {
+if ( !empty($_POST['id_articulo'])||!empty($_POST['gramaje'] )) {
     
 		
     // keep track post values		
     $gramaje = $_POST['gramaje'];
     $id_articulo =$_POST['id_articulo'];
 
-    echo $gramaje;
+    echo "El gramaje es".$gramaje;
+    echo "El id del articulo es".$id_articulo;
 
 
    
@@ -52,7 +59,8 @@ if ( !empty($_POST)) {
         $sql = "INSERT INTO recetas_articulos (id_articulo,id_receta,gramaje) values(?, ?, ?)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id_articulo, $id_receta, $gramaje]);
-        echo $id_receta;
+        // echo $id_receta;
+        echo $gramaje;
         $pdo->commit(); 
 
         // echo '<script type="text/javascript">'; 
@@ -102,7 +110,7 @@ if ( !empty($_POST)) {
 						<td> <?=$articulo['nombre']?></td>
 						<td> <?=$articulo['proveedor']?></td>
 						<td> <?=$articulo['precio']?></td>
-                        <td> <input type="text" name="gramaje"></td>
+                        <td> <input type="text" name="gramaje" ></td>
                         <td>
                         <div class="custom-control custom-radio">
                             <!-- <input type="radio" class="custom-control-input"  name="id_articulo" > -->
