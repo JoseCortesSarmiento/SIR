@@ -3,7 +3,7 @@ include 'global/config.php';
 include 'global/conexion.php';
 include 'templates/head.php';
 include 'global/sesion.php';
-include 'global/header.php';
+
 
 
 if (!empty($_GET['id_receta'])) { 
@@ -45,7 +45,7 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
     <br>
     <div class="row">
     <div class="col-sm">
-        <img src="<?= $receta['foto_empresa']?>" class="img-fluid" alt="Responsive image">
+        <img src="https://res.cloudinary.com/dlkn9mexh/image/upload/v1590681496/los-danzantes-oaxaca_nyhcmd.jpg" class="img-fluid" alt="Responsive image">
     </div>
 
     <div class="col-sm">
@@ -74,12 +74,10 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
     <div class="row">
     <div class="col-4"></div>
         <div class="col-4 ">
-            <img src="<?=$receta['foto_logo']?>" class="img-fluid" alt="Responsive image">
+            <img src="https://res.cloudinary.com/dlkn9mexh/image/upload/v1590681517/28e961d4bdff55d94628b69482fa9a0f_frtcwu.jpg" class="img-fluid" alt="Responsive image">
         </div>
     <div class="col-4"></div>
     </div>
-    <hr class="my-2">
-
 
     <div class="table-responsive">  
 			<table id="articulos" class="table table-striped table-bordered">  
