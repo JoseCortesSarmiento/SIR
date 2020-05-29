@@ -6,32 +6,24 @@ include 'global/sesion.php';
 include 'global/header.php';
 
 
-if (!empty($_GET['id_receta'])) { 
-    $id_receta = $_REQUEST['id_receta']; 
-    //  echo $id_proveedor;
-} 
-
-
-
-$sql = "SELECT * FROM recetas where  id_receta = ?";
-$q=$pdo->prepare($sql);
-$q->execute(array($id_receta));
-$receta = $q->fetch(PDO::FETCH_ASSOC); 
-
-
-$sql2 = "SELECT a.nombre, a.unidad_medida, ap.precio from articulos_proveedores ap,  articulos a, recetas r, recetas_articulos ra where  ra.id_receta = ? AND a.id_articulo = ra.id_articulo";
-$sql3="SELECT a.nombre, a.unidad_medida from  articulos a, recetas r, recetas_articulos ra WHERE  ra.id_receta = ? AND a.id_articulo = ra.id_articulo";
-
-$q=$pdo->prepare($sql3);
-$q->execute(array($id_receta));
-$articulos = $q->fetchAll(PDO::FETCH_ASSOC); 
-
-
-
-
-
-
-
+if ( !empty($_POST)) {
+		
+    // keep track post values		
+    $nombre = $_POST['nombre_platillo'];
+    $categoria = $_POST['categoria'];
+    $rendimiento=$_POST['rendimiento'];
+    $mise_en_place=$_POST['mise_en_place'];
+    $preparacion=$_POST['preparacion'];
+    
+    $sql = "INSERT INTO usuarios ( correo, contra, nombre, estatus, rol) values(?, crypt(?, gen_salt('md5')), ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$correo, $contra, $nombre, $estatus, $rol]);	
+        
+        echo '<script type="text/javascript">'; 
+        echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha agregado un nuevo usuario","success");'; 
+        echo '}, 500);</script>'; 
+}
+?>
 
 
 ?>
@@ -40,7 +32,11 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
 
     
 <div class="jumbotron">
-    <h2 class="h1-responsive text-center" ><?= ucfirst($receta['nombre_platillo'])?></h2>
+    <form action="">
+    <div class="md-form mb-5">
+        <input type="text" id="defaultForm-email" class="form-control validate" name="nombre" >
+        <label data-error="wrong" data-success="right" >Nombre platillo</label>
+    </div>
     <br>
     <br>
     <div class="row">
@@ -60,9 +56,10 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
             <strong>Código:</strong> <?=$receta['codigo']?>
           </p>
 
-          <p>
-            <strong>Categoria:</strong> <?= ucfirst($receta['categoria'])?>
-          </p>
+          <div class="md-form mb-5">
+             <input type="text" id="defaultForm-email" class="form-control validate" name="categoria" >
+             <label data-error="wrong" data-success="right" >Categoria</label>
+          </div>
 
 
           <p>
@@ -121,6 +118,9 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
     <a class="btn btn-primary btn-lg" role="button" href="recetas.php">Ver todas</a>
 </div>
 </div>
+    
+    </form>
+    
 
 <script>  
 	$(document).ready(function(){  

@@ -9,9 +9,9 @@ include 'global/header.php';
 
 
 <?php
-$sentencia = $pdo->prepare('SELECT * FROM recetas');
-$sentencia->execute();
-$recetas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+    $sentencia = $pdo->prepare('SELECT * FROM recetas');
+    $sentencia->execute();
+    $recetas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <br />
 <br />  
