@@ -88,7 +88,7 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
 						<th>Unidad medida</th>
 					</tr>  
 				</thead>  
-				<?php foreach ($articulos as $articulo): ?>
+				 <?php foreach ($articulos as $articulo): ?> 
 					
 					<tr>
 						<td> <?=$articulo['nombre']?></td>
@@ -96,7 +96,7 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
 						<td> <?=$articulo['unidad_medida']?></td>
 					</tr>
 
-				<?php endforeach; ?>
+				<?php endforeach; ?> 
 			</table>  
         </div>
     <p>

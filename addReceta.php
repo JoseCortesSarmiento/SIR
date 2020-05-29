@@ -3,14 +3,8 @@ include 'global/config.php';
 include 'global/conexion.php';
 include 'templates/head.php';
 include 'global/sesion.php';
-include 'global/header.php';
 
 
-// $sentencia = $pdo->prepare('SELECT ap.id_articulos_proveedores, a.id_articulo, a.nombre, ap.precio, a.unidad_medida, a.stock_minimo, a.stock_almacenado, a.stock_maximo, a.descripcion, a.estatus, p.nombre as proveedor
-// FROM articulos a, proveedores p, articulos_proveedores ap 
-// WHERE a.id_articulo = ap.id_articulo and p.id_proveedor = ap.id_proveedor');
-// $sentencia->execute();
-// $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
 
 if ( !empty($_POST)) {
@@ -23,27 +17,37 @@ if ( !empty($_POST)) {
     $presentacion=$_POST['presentacion'];
     $mise_en_place=$_POST['mise_en_place'];
     $preparacion=$_POST['preparacion'];
+    $rendimiento=$_POST['rendimiento'];
+    $codigo=$_POST['codigo'];
 
     echo $nombre;
     echo $foto_receta;
     echo $categoria;
     echo $presentacion;
 
-
+   
     
 
     try{
         $pdo->beginTransaction(); 
-        $sql = "INSERT INTO recetas (nombre_platillo, foto_receta, categoria,  presentacion, mise_en_place, preparacion) values(?, ?, ?, ?,?,?)";
+        $sql = "INSERT INTO recetas (nombre_platillo, foto_receta, categoria,  presentacion, mise_en_place, preparacion, rendimiento, codigo) values(?, ?, ?, ?,?,?,?,?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$nombre, $foto_receta, $categoria,  $presentacion, $mise_en_place, $preparacion]);
+        $stmt->execute([$nombre, $foto_receta, $categoria,  $presentacion, $mise_en_place, $preparacion, $rendimiento, $codigo]);
+        $id_receta=$pdo->lastInsertId();
+        $_SESSION['receta']=$id_receta; 
+        echo $id_receta;
         $pdo->commit(); 
 
-        echo '<script type="text/javascript">'; 
-        echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha agregado una nueva receta '.$nombre.'","success");'; 
-        echo '}, 500);</script>'; 
-        $arr = $stmt->errorInfo();
-        print_r($arr);
+        // echo '<script type="text/javascript">'; 
+        // echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha agregado una nueva receta '.$nombre.'","success");'; 
+        // echo '}, 500);</script>'; 
+        // $arr = $stmt->errorInfo();
+        // print_r($arr);
+
+        //de articulos
+        header('location: articuloReceta.php');
+
+        
 
     }
 
@@ -52,8 +56,12 @@ if ( !empty($_POST)) {
         throw $e;  
     } 
 
+
+   
    
 }
+
+
 ?>
 
 <div class="container">
@@ -66,10 +74,9 @@ if ( !empty($_POST)) {
         <label data-error="wrong" data-success="right" >Nombre platillo</label>
     </div>
 
-    <!-- <div class="md-form mb-5">
-            <input type="text"  class="form-control validate" disabled value=10>
-            <label data-error="wrong" data-success="right">Codigo</label>
-    </div> -->
+    <div class="md-form mb-5">
+            <input type="text"  class="form-control validate" value=10 name="codigo" hidden>
+    </div>
     <div class="text-left">       
           <div class="md-form mb-5">
             <select class="browser-default custom-select" name="categoria">
@@ -83,10 +90,9 @@ if ( !empty($_POST)) {
           </div>
 
 
-          <!-- <div class="md-form mb-5">
-            <input type="text" class="form-control validate"  disabled value=1>
-            <label data-error="wrong" data-success="right">Rendimiento</label>
-          </div> -->
+          <div class="md-form mb-5">
+            <input type="text" class="form-control validate" value=1 name="rendimiento" hidden>
+          </div>
           
 
          
@@ -123,15 +129,16 @@ if ( !empty($_POST)) {
     </div>
 
     <div class="modal-footer d-flex justify-content-center">
-        <button type="submit"  class="btn btn-default">Agregar</button>
+        <button type="submit"  class="btn ">Agregar</button>
     </div>
 
 </form>
+
     
 </div>
 </div>
 
-    
+
     
  
     
