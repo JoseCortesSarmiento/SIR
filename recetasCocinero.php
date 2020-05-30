@@ -31,7 +31,7 @@ include 'global/sesion.php';
             <th>Nombre</th>
             <th>Categoria</th>
             <th>Importe total</th>
-            <th>Acciones</th>
+            <th>Detalle</th>
         </tr>
     </thead>
     <?php foreach ($recetas as $receta): ?>
@@ -42,21 +42,10 @@ include 'global/sesion.php';
             <td> <?=$receta['importe_total']?></td>
             <td>
 
-            <span style="font-size: 32px; color: darkturquoise;">
-                <a href="updateRecetas.php?id_receta=
-                <?=$receta['id_receta']?>"
-                class="btn btn-default btn-rounded mb-4"  > 
-                <i class="fas fa-edit"></i></a>
-            </span>
+           
 
             <span style="font-size: 32px; color: tomato;">
-                <a href="deleteReceta.php?id_receta=<?=$receta['id_receta']?>" 
-                class="btn btn-red btn-rounded mb-4" > 
-                <i class="fas fa-trash-alt"></i></a>
-            </span>  
-
-            <span style="font-size: 32px; color: tomato;">
-                <a href="detalleReceta.php?id_receta=<?=$receta['id_receta']?>" 
+                <a href="detalleRecetaCocinero.php?id_receta=<?=$receta['id_receta']?>" 
                 class="btn btn-secondary-color btn-rounded mb-4" > 
                 <i class="fas fa-eye"></i></a>
             </span> 
