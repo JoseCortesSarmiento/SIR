@@ -4,6 +4,22 @@ include 'global/conexion.php';
 include 'templates/head.php';
 include 'global/sesion.php';
 
+$gramos=.2;
+$cuesta=120;
+$calculado=0;
+
+
+$costo = $pdo->prepare("CALL costoTotal(?,?,?)");
+$costo->bindParam(1, $gramos, PDO::PARAM_STR);
+$costo->bindParam(2, $cuesta, PDO::PARAM_STR);
+$costo->bindParam(3, $calculado, PDO::PARAM_STR);
+$costo->execute();
+print "procedure returned $calculado\n";
+
+
+
+
+
 
 
 if (!empty($_GET['id_receta'])) { 
@@ -21,7 +37,7 @@ $receta = $q->fetch(PDO::FETCH_ASSOC);
 
 
 
-$sql4="SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio
+$sql4="SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total
 FROM articulos a, recetas_articulos ra, recetas r, articulos_proveedores ap
 WHERE r.id_receta=? AND ra.id_receta=r.id_receta AND ra.id_articulos_proveedores=ap.id_articulos_proveedores AND ap.id_articulo=a.id_articulo";
 
@@ -29,12 +45,19 @@ $q=$pdo->prepare($sql4);
 $q->execute(array($id_receta));
 $articulos = $q->fetchAll(PDO::FETCH_ASSOC); 
 
+//obtener costo unitario de cada producto al multiplicarlo por el gramaje de la receta
+
+
+
+
+
 ?>
 
 <div class="container">
 
     
 <div class="jumbotron">
+<h4><?php echo $calculado ?></h4>
     <h2 class="h1-responsive text-center" ><?= ucfirst($receta['nombre_platillo'])?></h2>
     <br>
     <br>
@@ -92,7 +115,7 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
 						<td> <?=$articulo['gramaje']?></td>
 						<td> <?=$articulo['unidad_medida']?></td>
                         <td> $<?=$articulo['precio']?>.00</td>
-                        <td>Hola</td>
+                        <td>$<?=$articulo['gramaje']*$articulo['precio']?>.00</td>
 					</tr>
 
 				<?php endforeach; ?> 

@@ -5,7 +5,11 @@ include 'templates/head.php';
 include 'global/sesion.php';
 
 
+        $sql8 ="SELECT COUNT(*) FROM recetas_articulos";
+        $stmt8 = $pdo->prepare($sql8);
+        $stmt8->execute();
 
+        $codigo=$stmt8+1;
 
 if ( !empty($_POST)) {
     
@@ -18,7 +22,7 @@ if ( !empty($_POST)) {
     $mise_en_place=$_POST['mise_en_place'];
     $preparacion=$_POST['preparacion'];
     $rendimiento=$_POST['rendimiento'];
-    $codigo=$_POST['codigo'];
+    // $codigo=$_POST['codigo'];
 
     echo $nombre;
     echo $foto_receta;
@@ -74,9 +78,9 @@ if ( !empty($_POST)) {
         <label data-error="wrong" data-success="right" >Nombre platillo</label>
     </div>
 
-    <div class="md-form mb-5">
+    <!-- <div class="md-form mb-5">
             <input type="text"  class="form-control validate" value=10 name="codigo" hidden>
-    </div>
+    </div> -->
     <div class="text-left">       
           <div class="md-form mb-5">
             <select class="browser-default custom-select" name="categoria">
