@@ -48,26 +48,26 @@ try{
 
 
 //MONGODB
-$client = new MongoDB\Driver\Manager(
-  'mongodb+srv://testing-admin:lestatme1@testing-zs41u.mongodb.net/');
+// $client = new MongoDB\Driver\Manager(
+//   'mongodb+srv://testing-admin:lestatme1@testing-zs41u.mongodb.net/');
 
-  if($client){
-    echo  nl2br ("Connection to MongoDBAtlas successfully\n");
-  }
+//   if($client){
+//     echo  nl2br ("Connection to MongoDBAtlas successfully\n");
+//   }
 
-  $listdatabases = new MongoDB\Driver\Command(["listDatabases" => 1]);
-  if($listdatabases){
-    echo  nl2br ("listdatabases\n");
-  }
+//   $listdatabases = new MongoDB\Driver\Command(["listDatabases" => 1]);
+//   if($listdatabases){
+//     echo  nl2br ("listdatabases\n");
+//   }
 
-  $res = $client->executeCommand("admin", $listdatabases);
-  if($res){
-    echo  nl2br ("res\n");
-  }
+//   $res = $client->executeCommand("admin", $listdatabases);
+//   if($res){
+//     echo  nl2br ("res\n");
+//   }
 
-  $databases = current($res->toArray());
-  foreach ($databases->databases as $el) {
+//   $databases = current($res->toArray());
+//   foreach ($databases->databases as $el) {
     
-    echo nl2br ($el->name . "\n");
-}
+//     echo nl2br ($el->name . "\n");
+// }
 ?>

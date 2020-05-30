@@ -87,8 +87,10 @@ else {
 
 
         <div class="md-form mb-5">
-          <input type="text"  class="form-control validate" name="unidad_medida" value="<?php echo !empty($unidad_medida)?$unidad_medida:''; ?>">
-          <label data-error="wrong" data-success="right" >Unidad medida</label>
+        <select class="browser-default custom-select" name="unidad_medida">
+                <option selected value="kilo">Kilo</option>
+                <option value="litro">Litro</option>
+        </select>
         </div>
 
 
