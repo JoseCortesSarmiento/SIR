@@ -167,7 +167,7 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
 						<td> <?=$articulo['gramaje']?></td>
 						<td> <?=$articulo['unidad_medida']?></td>
                         <td> $<?=$articulo['precio']?>.00</td>
-                        <td>$<?=$articulo['gramaje']*$articulo['precio']?>.00</td>
+                        <td>$<?=$articulo['costo_total']?></td>
 					</tr>
 
 				<?php endforeach; ?> 
