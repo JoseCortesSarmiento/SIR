@@ -18,17 +18,12 @@ $id_receta=$_SESSION['receta'];
 
 
 
-if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
-    
-		
-    // keep track post values		
+if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {	
     $gramaje = $_POST['gramaje'];
     $id_articulos_proveedores =$_POST['id_articulos_proveedores'];
 
     
     echo "El gramaje es".$gramaje;
-    // echo "El id del articulo es".$id_articulo;
-
 
    
     
@@ -38,13 +33,9 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
         $sql = "INSERT INTO recetas_articulos (id_articulos_proveedores,id_receta,gramaje) values(?, ?, ?)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id_articulos_proveedores, $id_receta, $gramaje]);
-        // echo $id_receta;
+
         echo $gramaje;
-      
-
-
-
-       
+             
         $precio="SELECT precio FROM articulos_proveedores where id_articulos_proveedores=:id_articulos_proveedores";
         $stmt2=$pdo->prepare($precio);
         $stmt2->execute(['id_articulos_proveedores'=>$id_articulos_proveedores]);
