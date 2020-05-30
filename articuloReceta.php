@@ -40,18 +40,33 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
         $stmt->execute([$id_articulos_proveedores, $id_receta, $gramaje]);
         // echo $id_receta;
         echo $gramaje;
+      
+
+
+
+       
+        $precio="SELECT precio FROM articulos_proveedores where id_articulos_proveedores=:id_articulos_proveedores";
+        $stmt2=$pdo->prepare($precio);
+        $stmt2->execute(['id_articulos_proveedores'=>$id_articulos_proveedores]);
+        $elPrecio = $stmt2->fetch(PDO::FETCH_ASSOC);
+        echo "El precio es".$elPrecio['precio'];
+
+        $precioXgramaje=$elPrecio['precio']*$gramaje;
+
+
+        echo "El precio x gramaje es". $precioXgramaje;
+
+        $insertaPrecio="UPDATE recetas_articulos SET costo_total=:costo_total WHERE id_articulos_proveedores=:id_articulos_proveedores";
+        $stmt3 = $pdo->prepare($insertaPrecio);
+        $stmt3->execute(['costo_total'=>$precioXgramaje,'id_articulos_proveedores'=>$id_articulos_proveedores ]);
+
         $pdo->commit(); 
+
+
 
         echo '<script type="text/javascript">'; 
         echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha agregado un nuevo articulo a la receta","success");'; 
         echo '}, 500);</script>'; 
-
-       
-
-        //de articulos
-        // header('location: articuloReceta.php');
-
-        
 
     }
 
@@ -59,10 +74,6 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
         $pdo->rollback(); 
         throw $e;  
     } 
-
-
-   
-   
 }
 
 

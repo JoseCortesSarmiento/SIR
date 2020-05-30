@@ -4,17 +4,20 @@ include 'global/conexion.php';
 include 'templates/head.php';
 include 'global/sesion.php';
 
-$gramos=.2;
-$cuesta=120;
-$calculado=0;
+// $gramos=.2;
+// $cuesta=120;
+// $calculado=0;
 
 
-$costo = $pdo->prepare("CALL costoTotal(?,?,?)");
-$costo->bindParam(1, $gramos, PDO::PARAM_STR);
-$costo->bindParam(2, $cuesta, PDO::PARAM_STR);
-$costo->bindParam(3, $calculado, PDO::PARAM_STR);
-$costo->execute();
-print "procedure returned $calculado\n";
+// $costo = $pdo->prepare("CALL costoTotal(?,?,?)");
+// $costo->bindParam(1, $gramos, PDO::PARAM_STR);
+// $costo->bindParam(2, $cuesta, PDO::PARAM_STR);
+// $costo->bindParam(3, $calculado, PDO::PARAM_STR);
+// $costo->execute();
+// print "procedure returned $calculado\n";
+
+
+
 
 
 
@@ -26,6 +29,52 @@ if (!empty($_GET['id_receta'])) {
     $id_receta = $_REQUEST['id_receta']; 
     //  echo $id_proveedor;
 } 
+
+
+
+function getImporte(int $id_receta){
+
+   $host= "localhost";
+   $dbname= "sistemarest";
+   $username="root";
+   $password="";
+  
+
+
+    try{
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+
+        $sql10= "CALL calculaImporte(:id_receta, @total)";
+        $importe= $pdo->prepare($sql10);
+        $importe->bindParam(':id_receta',$id_receta, PDO::PARAM_INT);
+        $importe->execute();
+        $importe->closeCursor();
+        
+        
+        $row2 = $pdo->query("SELECT @total AS total")->fetch(PDO::FETCH_ASSOC);
+                if ($row2) {
+                    return $row2 !== false ? $row2['total'] : null;
+                }
+               
+        
+        echo $row2['total'];
+    }
+        catch (PDOException $e) {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    
+        
+}
+$miImporte=getImporte($id_receta);
+
+$insertado="UPDATE recetas set importe_total=:importe_total WHERE id_receta=:id_receta";
+$stmt10 = $pdo->prepare($insertado); 
+$stmt10->execute(['importe_total'=>$miImporte, 'id_receta'=>$id_receta]);
+
+
+
+
 
 
 
@@ -45,10 +94,13 @@ $q=$pdo->prepare($sql4);
 $q->execute(array($id_receta));
 $articulos = $q->fetchAll(PDO::FETCH_ASSOC); 
 
-//obtener costo unitario de cada producto al multiplicarlo por el gramaje de la receta
+// foreach ($articulos as $art){
+//     $costoGramaje=$art['gramaje']*$art['precio'];
+// }
 
-
-
+// $sql11="UPDATE recetas_articulos set costo_total=:costo_total WHERE id_receta=:id_receta";
+// $stmt11 = $pdo->prepare($insertado); 
+// $stmt11->execute(['importe_total'=>$miImporte, 'id_receta'=>$id_receta]);
 
 
 ?>
@@ -57,7 +109,7 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
 
     
 <div class="jumbotron">
-<h4><?php echo $calculado ?></h4>
+
     <h2 class="h1-responsive text-center" ><?= ucfirst($receta['nombre_platillo'])?></h2>
     <br>
     <br>
@@ -121,6 +173,13 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
 				<?php endforeach; ?> 
 			</table>  
         </div>
+        <br>
+        <hr class="my-2">
+        <div class="text-right">
+        <p class="lead">  <strong>Importe:</strong> $<?= $miImporte?>.00</p>
+        </div>
+       
+
     <p>
         <strong>Presentación:</strong>
     </p>
