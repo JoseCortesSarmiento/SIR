@@ -12,30 +12,8 @@ $sentencia->execute();
 $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
 
-
-
-
-
-
-// print_r($_SESSION['receta']);
-
 $id_receta=$_SESSION['receta'];
-// echo $id_receta;
 
-
-
-
-// $sql2 = "INSERT INTO recetas_articulos (id_receta, id_articulo, gramaje) VALUES(?,?,?)";
-// $stmt2 = $pdo->prepare($sql2);
-
-
-// $stmt->execute([$nombre, $unidad_medida, $stock_minimo, $stock_almacenado,$stock_maximo, $descripcion, $estatus]);	
-// $articuloId=$pdo->lastInsertId();
-// echo $id_proveedor;
-// $stmt2->execute([$articuloId, $id_proveedor, $precio]);
-//       echo '<script type="text/javascript">'; 
-//       echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha agregado un nuevo articulo","success");'; 
-//       echo '}, 500);</script>'; 
 
 
 
@@ -64,14 +42,14 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
         echo $gramaje;
         $pdo->commit(); 
 
-        // echo '<script type="text/javascript">'; 
-        // echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha agregado una nueva receta '.$nombre.'","success");'; 
-        // echo '}, 500);</script>'; 
-        // $arr = $stmt->errorInfo();
-        // print_r($arr);
+        echo '<script type="text/javascript">'; 
+        echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha agregado un nuevo articulo a la receta","success");'; 
+        echo '}, 500);</script>'; 
+
+       
 
         //de articulos
-        header('location: articuloReceta.php');
+        // header('location: articuloReceta.php');
 
         
 
@@ -102,7 +80,6 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
 						<th>Nombre</th>
 						<th>Proveedor</th>
                         <th>Precio</th>
-                        <th>Gramaje</th>
                         <th>ID articulos_proveedores</th>
                         <th>Seleccionar</th>
 					</tr>  
@@ -112,12 +89,11 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
 						<td> <?=$articulo['nombre']?></td>
 						<td> <?=$articulo['proveedor']?></td>
 						<td> <?=$articulo['precio']?></td>
-                        <td> <input type="text" name="gramaje" ></td>
                         <td><?=$articulo['id_articulos_proveedores']?></td>
                         <td>
                         <div class="custom-control custom-radio">
                             <!-- <input type="radio" class="custom-control-input"  name="id_articulo" > -->
-                            <input type="radio" name="id_articulos_proveedores" value="<?=$articulo['id_articulos_proveedores']?>">Seleccionar
+                            <input type="radio" name="id_articulos_proveedores" value="<?=$articulo['id_articulos_proveedores']?>">
                             <!-- <label class="custom-control-label" for="defaultUnchecked">Default unchecked</label> -->
                         </div>
                         </td>
@@ -125,6 +101,14 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
 				<?php endforeach; ?>
 			</table>  
         </div>
+
+        <div class="md-form mb-5">
+            <input type="text"  class="form-control validate" name="gramaje" >
+            <label data-error="wrong" data-success="right" >Gramaje del producto seleccionado</label>
+        </div>
+
+         
+
 
         <div class="modal-footer d-flex justify-content-center">
         <button type="submit"  class="btn ">Agregar</button>

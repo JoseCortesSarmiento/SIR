@@ -38,9 +38,9 @@ if ( !empty($_POST)) {
         echo $id_receta;
         $pdo->commit(); 
 
-        // echo '<script type="text/javascript">'; 
-        // echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha agregado una nueva receta '.$nombre.'","success");'; 
-        // echo '}, 500);</script>'; 
+        echo '<script type="text/javascript">'; 
+        echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha agregado una nueva receta '.$nombre.'","success");'; 
+        echo '}, 500);</script>'; 
         // $arr = $stmt->errorInfo();
         // print_r($arr);
 

@@ -37,6 +37,8 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
 
 
 
+
+
 ?>
 
 <div class="container">
@@ -89,7 +91,8 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
 						<th>Nombre</th>
 						<th>Gramaje</th>
 						<th>Unidad medida</th>
-                        <th>Precio</th>
+                        <th>Costo unitario</th>
+                        <th>Costo total</th>
 					</tr>  
 				</thead>  
 				 <?php foreach ($articulos as $articulo): ?> 
@@ -98,7 +101,8 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
 						<td> <?=$articulo['nombre']?></td>
 						<td> <?=$articulo['gramaje']?></td>
 						<td> <?=$articulo['unidad_medida']?></td>
-                        <td> <?=$articulo['precio']?></td>
+                        <td> $<?=$articulo['precio']?>.00</td>
+                        <td>Hola</td>
 					</tr>
 
 				<?php endforeach; ?> 
