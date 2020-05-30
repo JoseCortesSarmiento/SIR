@@ -34,6 +34,10 @@ include 'global/header.php';
       <li class="nav-item">
         <a class="nav-link" href="recetas.php">Recetas</a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="historial.php">Historial</a>
+      </li>
     </ul>
 
     <ul class="navbar-nav ml-auto nav-flex-icons">
