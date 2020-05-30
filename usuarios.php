@@ -40,7 +40,7 @@ $usuarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
     <?php foreach ($usuarios as $usuario): ?>
         <tr>
             <td> <?=$usuario['correo']?></td>
-            <td> <?=$usuario['contra']?></td>
+            <td> <input type='password' value='". <?=$usuario['contra']?> ."' readonly='readonly'></td>
             <td> <?=$usuario['nombre']?></td>
             <td> <?php 				
                 if ($usuario['estatus']==0) 
