@@ -92,7 +92,7 @@ $q=$pdo->prepare($sql);
 $q->execute(array($id_receta));
 $receta = $q->fetch(PDO::FETCH_ASSOC); 
 
-$sql4="SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total
+$sql4="SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total, r.rendimiento
 FROM articulos a, recetas_articulos ra, recetas r, articulos_proveedores ap
 WHERE r.id_receta=? AND ra.id_receta=r.id_receta AND ra.id_articulos_proveedores=ap.id_articulos_proveedores AND ap.id_articulo=a.id_articulo";
 

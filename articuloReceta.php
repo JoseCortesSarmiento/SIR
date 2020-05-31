@@ -119,7 +119,7 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
         <button type="submit"  class="btn ">Agregar</button>
 
 
-        <button><a href="detalleReceta.php?id_receta=<?=$id_receta?>"  >Ver receta</></button>
+        <button><a href="detalleReceta.php?id_receta=<?=$id_receta?>" > Ver receta</a></button>
     </div>
 </form>
 

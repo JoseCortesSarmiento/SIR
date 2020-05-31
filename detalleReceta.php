@@ -4,17 +4,7 @@ include 'global/conexion.php';
 include 'templates/head.php';
 include 'global/sesion.php';
 
-// $gramos=.2;
-// $cuesta=120;
-// $calculado=0;
 
-
-// $costo = $pdo->prepare("CALL costoTotal(?,?,?)");
-// $costo->bindParam(1, $gramos, PDO::PARAM_STR);
-// $costo->bindParam(2, $cuesta, PDO::PARAM_STR);
-// $costo->bindParam(3, $calculado, PDO::PARAM_STR);
-// $costo->execute();
-// print "procedure returned $calculado\n";
 
 
 
@@ -94,13 +84,6 @@ $q=$pdo->prepare($sql4);
 $q->execute(array($id_receta));
 $articulos = $q->fetchAll(PDO::FETCH_ASSOC); 
 
-// foreach ($articulos as $art){
-//     $costoGramaje=$art['gramaje']*$art['precio'];
-// }
-
-// $sql11="UPDATE recetas_articulos set costo_total=:costo_total WHERE id_receta=:id_receta";
-// $stmt11 = $pdo->prepare($insertado); 
-// $stmt11->execute(['importe_total'=>$miImporte, 'id_receta'=>$id_receta]);
 
 
 ?>
