@@ -2,7 +2,14 @@
 
 include 'global/config.php';
 include 'global/conexion.php';
+
+if($_SESSION['usuario']['rol']!=1){
+        
+        header("location:home.php");
+}
+
 include 'global/header.php';
+
 
 
 
