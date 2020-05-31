@@ -4,7 +4,7 @@ include 'global/conexion.php';
 include 'templates/head.php';
 include 'global/sesion.php';
 
-// $id_receta=$_SESSION['receta'];
+
 
 if (!empty($_GET['id_receta'])) { 
     $id_receta = $_REQUEST['id_receta']; 
@@ -62,17 +62,29 @@ if ( !empty($_POST)) {
     $pdo->beginTransaction();
 
     foreach ($articulos as $articulo) {
-         $disminuirStock->execute(['stock_almacenado'=>($articulo['stock_almacenado']-($articulo['gramaje']*$rendimiento2)),'id_articulo'=>$articulo['id_articulo']]);  
+        if($articulo['stock_almacenado']-($articulo['gramaje']*$rendimiento2)<0) {
+            $disminuirStock->execute(['dsa']);
+            echo '<script type="text/javascript">'; 
+            echo 'setTimeout(function () { swal("¡ERROR!","El producto no pudo ser actualizado","error");'; 
+            echo '}, 500);</script>'; 
+        }
+            
+        else{
+            $disminuirStock->execute(['stock_almacenado'=>($articulo['stock_almacenado']-($articulo['gramaje']*$rendimiento2)),'id_articulo'=>$articulo['id_articulo']]); 
+            echo '<script type="text/javascript">'; 
+            echo 'setTimeout(function () { swal("¡ÉXITO!","Si puede hacer la receta, hay suficientes productos","success");'; 
+            echo '}, 500);</script>';  
+        }
     }
 
     $_SESSION['listado'] = array();
     $pdo->commit(); 
-    print_r($_SESSION)['listado'];
+    // print_r($_SESSION)['listado'];
 
      }
-        catch(Exception $e){
-        if($pdo->inTransaction()) $pdo->rollback(); //  Si fallo la insercion en la transaccion .. rollback
-        $errores = 1;  // Mostramos el error en pantalla y matamos la ejecución
+    catch(Exception $e){
+        if($pdo->inTransaction()) $pdo->rollback();
+        $errores = 1;  
         // var_dump($e);
     }
    
@@ -80,57 +92,12 @@ if ( !empty($_POST)) {
 }
 
 
-
- 
-
-// function getImporte(int $id_receta){
-
-//    $host= "localhost";
-//    $dbname= "sistemarest";
-//    $username="root";
-//    $password="";
-  
-
-
-//     try{
-//         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-
-//         $sql10= "CALL calculaImporte(:id_receta, @total)";
-//         $importe= $pdo->prepare($sql10);
-//         $importe->bindParam(':id_receta',$id_receta, PDO::PARAM_INT);
-//         $importe->execute();
-//         $importe->closeCursor();
-        
-        
-//         $row2 = $pdo->query("SELECT @total AS total")->fetch(PDO::FETCH_ASSOC);
-//                 if ($row2) {
-//                     return $row2 !== false ? $row2['total'] : null;
-//                 }
-               
-        
-//         echo $row2['total'];
-//     }
-//         catch (PDOException $e) {
-//             die("Error occurred:" . $e->getMessage());
-//         }
-//         return null;
-    
-        
-// }
-
-
-
-// $miImporte=getImporte($id_receta);
-// $insertado="UPDATE recetas set importe_total=:importe_total WHERE id_receta=:id_receta";
-// $stmt10 = $pdo->prepare($insertado); 
-// $stmt10->execute(['importe_total'=>$miImporte, 'id_receta'=>$id_receta]);
-
 $sql = "SELECT * FROM recetas where  id_receta = ?";
 $q=$pdo->prepare($sql);
 $q->execute(array($id_receta));
 $receta = $q->fetch(PDO::FETCH_ASSOC); 
 
-$sql4="SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total, r.rendimiento, a.id_articulo
+$sql4="SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total, r.rendimiento, a.id_articulo, a.stock_almacenado
 FROM articulos a, recetas_articulos ra, recetas r, articulos_proveedores ap
 WHERE r.id_receta=? AND ra.id_receta=r.id_receta AND ra.id_articulos_proveedores=ap.id_articulos_proveedores AND ap.id_articulo=a.id_articulo";
 
@@ -204,6 +171,7 @@ $_SESSION['receta']=$id_receta;
 						<th>Gramaje</th>
 						<th>Unidad medida</th>
                         <th>Rendimiento</th>
+                        <th>Almacenado</th>
 
 					</tr>  
 				</thead>  
@@ -226,11 +194,14 @@ $_SESSION['receta']=$id_receta;
                         <?php else : ?>
                             <td> <?=$rendimiento2?></td>
                         <?php endif; ?>
-                        
+                        <td><?=$articulo['stock_almacenado']?>  </td>
                         
 					</tr>
 
+                 
+
 				<?php endforeach; ?> 
+
 			</table>  
         </div>
         <br>
