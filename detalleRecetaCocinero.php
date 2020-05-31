@@ -4,25 +4,6 @@ include 'global/conexion.php';
 include 'templates/head.php';
 include 'global/sesion.php';
 
-// $gramos=.2;
-// $cuesta=120;
-// $calculado=0;
-
-
-// $costo = $pdo->prepare("CALL costoTotal(?,?,?)");
-// $costo->bindParam(1, $gramos, PDO::PARAM_STR);
-// $costo->bindParam(2, $cuesta, PDO::PARAM_STR);
-// $costo->bindParam(3, $calculado, PDO::PARAM_STR);
-// $costo->execute();
-// print "procedure returned $calculado\n";
-
-
-
-
-
-
-
-
 
 
 if (!empty($_GET['id_receta'])) { 
@@ -31,6 +12,38 @@ if (!empty($_GET['id_receta'])) {
 } 
 
 
+if ( !empty($_POST)) {
+    
+			
+    $rendimiento = $_POST['rendimiento'];
+     
+        // try{ 
+        //     $pdo->beginTransaction(); 
+        //     $sql2 = "UPDATE recetas set rendimiento =:rendimiento,    WHERE id_receta =:id_receta"; 
+        //     $stmt = $pdo->prepare($sql2); 
+        //     $stmt->execute(['rendimiento'=>$rendimiento,  'id_receta'=>$id_receta]); 
+        //     // $stmt->debugDumpParams(); 
+        //     echo '<script type="text/javascript">'; 
+        //     echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha actualizado el producto","success");'; 
+        //     echo '}, 500);</script>'; 
+        //     $pdo->commit(); 
+        // } 
+        // catch(Exception $e){ 
+        //     $pdo->rollback(); 
+        //     // $stmt->debugDumpParams(); 
+        //     echo '<script type="text/javascript">'; 
+        //     echo 'setTimeout(function () { swal("¡ERROR!","El producto no pudo ser actualizado","error");'; 
+        //     echo '}, 500);</script>'; 
+        //     throw $e;  
+        // } 
+        // // it takes me to the stock page, once I updated a product 
+        //  header('location: articulos.php');
+
+}
+
+
+
+ 
 
 function getImporte(int $id_receta){
 
@@ -66,25 +79,18 @@ function getImporte(int $id_receta){
     
         
 }
-$miImporte=getImporte($id_receta);
 
+
+
+$miImporte=getImporte($id_receta);
 $insertado="UPDATE recetas set importe_total=:importe_total WHERE id_receta=:id_receta";
 $stmt10 = $pdo->prepare($insertado); 
 $stmt10->execute(['importe_total'=>$miImporte, 'id_receta'=>$id_receta]);
-
-
-
-
-
-
 
 $sql = "SELECT * FROM recetas where  id_receta = ?";
 $q=$pdo->prepare($sql);
 $q->execute(array($id_receta));
 $receta = $q->fetch(PDO::FETCH_ASSOC); 
-
-
-
 
 $sql4="SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total
 FROM articulos a, recetas_articulos ra, recetas r, articulos_proveedores ap
@@ -94,13 +100,7 @@ $q=$pdo->prepare($sql4);
 $q->execute(array($id_receta));
 $articulos = $q->fetchAll(PDO::FETCH_ASSOC); 
 
-// foreach ($articulos as $art){
-//     $costoGramaje=$art['gramaje']*$art['precio'];
-// }
 
-// $sql11="UPDATE recetas_articulos set costo_total=:costo_total WHERE id_receta=:id_receta";
-// $stmt11 = $pdo->prepare($insertado); 
-// $stmt11->execute(['importe_total'=>$miImporte, 'id_receta'=>$id_receta]);
 
 
 ?>
@@ -135,9 +135,8 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
           </p>
 
 
-          <p>
-            <strong>Rendimiento:</strong> <?=$receta['rendimiento']?>
-          </p>
+         
+       
           
     </div>
     <hr>
@@ -148,6 +147,13 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
         </div>
     <div class="col-4"></div>
     </div>
+
+    <form action="detalleRecetaCocinero.php" method="post">
+            <div class="md-form mb-5">
+            <input type="text" id="defaultForm-email" class="form-control validate" name="rendimiento" >
+            <label data-error="wrong" data-success="right" for="defaultForm-email">Rendimiento</label>
+            </div>
+        </form>
 
     <div class="table-responsive">  
 			<table id="articulos" class="table table-striped table-bordered">  
@@ -164,7 +170,7 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
 					
 					<tr>
 						<td> <?=$articulo['nombre']?></td>
-						<td> <?=$articulo['gramaje']?></td>
+						<td> <?=$articulo['gramaje']*$articulo['rendimiento']?></td>
 						<td> <?=$articulo['unidad_medida']?></td>
                         <td> $<?=$articulo['precio']?>.00</td>
                         <td>$<?=$articulo['costo_total']?></td>
@@ -176,7 +182,7 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
         <br>
         <hr class="my-2">
         <div class="text-right">
-        <p class="lead">  <strong>Importe:</strong> $<?= $miImporte?>.00</p>
+        <p class="lead">  <strong>Importe:</strong> $<?= $miImporte?></p>
         </div>
        
 
@@ -196,8 +202,10 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
         <strong>Preparación:</strong>
     </p>
     <p class="lead">  <?=ucfirst($receta['preparacion'])?></p>
-   
-    <a class="btn btn-primary btn-lg" role="button" href="recetas.php">Ver todas</a>
+    <div class="modal-footer d-flex justify-content-center">
+        <button type="submit"  class="btn btn-default">Usar</button>
+      </div>
+    
 </div>
 </div>
 

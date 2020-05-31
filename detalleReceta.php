@@ -176,7 +176,7 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
         <br>
         <hr class="my-2">
         <div class="text-right">
-        <p class="lead">  <strong>Importe:</strong> $<?= $miImporte?>.00</p>
+        <p class="lead">  <strong>Importe:</strong> $<?= $miImporte?></p>
         </div>
        
 

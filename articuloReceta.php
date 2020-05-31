@@ -33,6 +33,7 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
         $sql = "INSERT INTO recetas_articulos (id_articulos_proveedores,id_receta,gramaje) values(?, ?, ?)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id_articulos_proveedores, $id_receta, $gramaje]);
+        $id_receta_articulo=$pdo->lastInsertId();
 
         echo $gramaje;
              
@@ -47,9 +48,9 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
 
         echo "El precio x gramaje es". $precioXgramaje;
 
-        $insertaPrecio="UPDATE recetas_articulos SET costo_total=:costo_total WHERE id_articulos_proveedores=:id_articulos_proveedores";
+        $insertaPrecio="UPDATE recetas_articulos SET costo_total=:costo_total WHERE id_receta_articulo=:id_receta_articulo";
         $stmt3 = $pdo->prepare($insertaPrecio);
-        $stmt3->execute(['costo_total'=>$precioXgramaje,'id_articulos_proveedores'=>$id_articulos_proveedores ]);
+        $stmt3->execute(['costo_total'=>$precioXgramaje,'id_receta_articulo'=>$id_receta_articulo ]);
 
         $pdo->commit(); 
 
