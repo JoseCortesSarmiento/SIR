@@ -8,7 +8,7 @@ if($_SESSION['usuario']['rol']!=1){
         
         header("location:home.php");
 }else{
-  print_r("ando entrando");
+
      if (isset($_GET["id_usuario"])) {
         try {
       
@@ -21,7 +21,7 @@ if($_SESSION['usuario']['rol']!=1){
           $statement->execute();
       
             echo '<script type="text/javascript">'; 
-            echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha borrado el proveedor","success");'; 
+            echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha borrado el usuario","success");'; 
             echo '}, 500);</script>'; 
 
            
