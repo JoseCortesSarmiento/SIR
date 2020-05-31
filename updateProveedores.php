@@ -3,7 +3,11 @@
 include 'global/config.php';
 include 'templates/head.php';
 include 'global/conexion.php';
-include 'global/sesion.php';
+
+if($_SESSION['usuario']['rol']!=1){
+        
+        header("location:home.php");
+}
 
 
 if (!empty($_GET['id_proveedor'])) { 
