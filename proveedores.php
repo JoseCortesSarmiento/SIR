@@ -1,4 +1,7 @@
 <?php
+//Mostrar errores en linux
+ini_set("display_errors", "1");
+error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 include 'global/config.php';
 include 'global/conexion.php';
 include 'templates/head.php';
@@ -7,9 +10,11 @@ include 'global/header.php';
 include 'addProveedor.php';
 ?>
 
-
-
 <?php
+//Mostrar errores en linux
+ini_set("display_errors", "1");
+error_reporting(E_ALL);
+
 $sentencia = $pdo->prepare('SELECT * FROM proveedores');
 $sentencia->execute();
 $proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
@@ -58,6 +63,9 @@ $proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 <div class="text-center">
   <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" 
   data-target="#modalAddProveedor">Agregar proveedor</a>
+</div>
+<div class="text-center">
+  <a class="btn btn-default btn-rounded mb-4" href="backupProveedores.php">Backup</a>
 </div>
 </div>  
 	</div> 

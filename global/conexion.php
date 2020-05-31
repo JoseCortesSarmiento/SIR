@@ -54,20 +54,4 @@ $client = new MongoDB\Driver\Manager(
   if($client){
     echo  nl2br ("Connection to MongoDBAtlas successfully\n");
   }
-
-  $listdatabases = new MongoDB\Driver\Command(["listDatabases" => 1]);
-  if($listdatabases){
-    echo  nl2br ("listdatabases\n");
-  }
-
-  $res = $client->executeCommand("admin", $listdatabases);
-  if($res){
-    echo  nl2br ("res\n");
-  }
-
-  $databases = current($res->toArray());
-  foreach ($databases->databases as $el) {
-    
-    echo nl2br ($el->name . "\n");
-}
 ?>
