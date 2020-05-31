@@ -5,7 +5,13 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 include 'global/config.php';
 include 'global/conexion.php';
 include 'templates/head.php';
-include 'global/sesion.php';
+
+
+if($_SESSION['usuario']['rol']!=1){
+        
+        header("location:home.php");
+}
+
 include 'global/header.php';
 include 'addProveedor.php';
 ?>

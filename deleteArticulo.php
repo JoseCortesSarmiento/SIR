@@ -2,11 +2,13 @@
 
 include 'global/config.php';
 include 'global/conexion.php';
-include 'global/header.php';
+include 'templates/head.php';
 
-
-
-     if (isset($_GET["id_articulos_proveedores"])) {
+if($_SESSION['usuario']['rol']!=1){
+        
+        header("location:home.php");
+}else{
+ if (isset($_GET["id_articulos_proveedores"])) {
         try {
       
           $id = $_GET["id_articulos_proveedores"];
@@ -30,4 +32,12 @@ include 'global/header.php';
       
       
 	   header('location: articulos.php');
+
+}
+
+include 'global/header.php';
+
+
+
+    
 ?>

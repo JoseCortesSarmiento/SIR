@@ -2,10 +2,17 @@
 include 'global/config.php';
 include 'global/conexion.php';
 include 'templates/head.php';
-include 'global/sesion.php';
+if($_SESSION['usuario']['rol']!=1){
+        
+        header("location:home.php");
+}
 
 
+        // $sql8 ="SELECT COUNT(*) FROM recetas_articulos";
+        // $stmt8 = $pdo->prepare($sql8);
+        // $stmt8->execute();
 
+        // $codigo=$stmt8+1;
 
 if ( !empty($_POST)) {
     

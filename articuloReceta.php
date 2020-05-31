@@ -18,17 +18,12 @@ $id_receta=$_SESSION['receta'];
 
 
 
-if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
-    
-		
-    // keep track post values		
+if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {	
     $gramaje = $_POST['gramaje'];
     $id_articulos_proveedores =$_POST['id_articulos_proveedores'];
 
     
     echo "El gramaje es".$gramaje;
-    // echo "El id del articulo es".$id_articulo;
-
 
    
     
@@ -38,20 +33,32 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
         $sql = "INSERT INTO recetas_articulos (id_articulos_proveedores,id_receta,gramaje) values(?, ?, ?)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id_articulos_proveedores, $id_receta, $gramaje]);
-        // echo $id_receta;
+        $id_receta_articulo=$pdo->lastInsertId();
+
         echo $gramaje;
+             
+        $precio="SELECT precio FROM articulos_proveedores where id_articulos_proveedores=:id_articulos_proveedores";
+        $stmt2=$pdo->prepare($precio);
+        $stmt2->execute(['id_articulos_proveedores'=>$id_articulos_proveedores]);
+        $elPrecio = $stmt2->fetch(PDO::FETCH_ASSOC);
+        echo "El precio es".$elPrecio['precio'];
+
+        $precioXgramaje=$elPrecio['precio']*$gramaje;
+
+
+        echo "El precio x gramaje es". $precioXgramaje;
+
+        $insertaPrecio="UPDATE recetas_articulos SET costo_total=:costo_total WHERE id_receta_articulo=:id_receta_articulo";
+        $stmt3 = $pdo->prepare($insertaPrecio);
+        $stmt3->execute(['costo_total'=>$precioXgramaje,'id_receta_articulo'=>$id_receta_articulo ]);
+
         $pdo->commit(); 
+
+
 
         echo '<script type="text/javascript">'; 
         echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha agregado un nuevo articulo a la receta","success");'; 
         echo '}, 500);</script>'; 
-
-       
-
-        //de articulos
-        // header('location: articuloReceta.php');
-
-        
 
     }
 
@@ -60,9 +67,7 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
         throw $e;  
     } 
 
-
-   
-   
+    
 }
 
 
@@ -112,6 +117,9 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
 
         <div class="modal-footer d-flex justify-content-center">
         <button type="submit"  class="btn ">Agregar</button>
+
+
+        <button><a href="detalleReceta.php?id_receta=<?=$id_receta?>" > Ver receta</a></button>
     </div>
 </form>
 

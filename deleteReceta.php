@@ -2,11 +2,12 @@
 include 'global/config.php';
 include 'global/conexion.php';
 include 'templates/head.php';
-include 'global/sesion.php';
 
-
-
-     if (isset($_GET["id_receta"])) {
+if($_SESSION['usuario']['rol']!=1){
+        
+        header("location:home.php");
+}else{
+  if (isset($_GET["id_receta"])) {
         try {
       
           $id = $_GET["id_receta"];
@@ -31,4 +32,7 @@ include 'global/sesion.php';
       
       
 	   header('location: recetas.php');
+  
+}
+
 ?>

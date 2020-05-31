@@ -6,7 +6,12 @@ error_reporting(E_ALL);
 include 'global/config.php';
 include 'global/conexion.php';
 include 'templates/head.php';
-include 'global/sesion.php';
+
+if($_SESSION['usuario']['rol']!=1){
+        
+        header("location:home.php");
+}
+
 include 'global/header.php';
 ?>
 
