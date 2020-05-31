@@ -2,7 +2,7 @@
 
 include 'global/config.php';
 include 'global/conexion.php';
-include 'template/head.php';
+include 'templates/head.php';
 
 if($_SESSION['usuario']['rol']!=1){
         
