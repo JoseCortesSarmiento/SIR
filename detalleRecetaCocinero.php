@@ -4,18 +4,23 @@ include 'global/conexion.php';
 include 'templates/head.php';
 include 'global/sesion.php';
 
-
+// $id_receta=$_SESSION['receta'];
 
 if (!empty($_GET['id_receta'])) { 
     $id_receta = $_REQUEST['id_receta']; 
     //  echo $id_proveedor;
 } 
-
+$rendimiento2=0;
 
 if ( !empty($_POST)) {
     
 			
-    $rendimiento = $_POST['rendimiento'];
+    $rendimiento2 = $_POST['rendimiento2'];
+    $id_receta=$_POST['id_receta'];
+    echo "eL NUEVO RENDIMIENTO ES ".$rendimiento2;
+    echo "El id de la receta es  ".$id_receta;
+    // $gramajeXrendimiento=$
+
      
         // try{ 
         //     $pdo->beginTransaction(); 
@@ -45,47 +50,47 @@ if ( !empty($_POST)) {
 
  
 
-function getImporte(int $id_receta){
+// function getImporte(int $id_receta){
 
-   $host= "localhost";
-   $dbname= "sistemarest";
-   $username="root";
-   $password="";
+//    $host= "localhost";
+//    $dbname= "sistemarest";
+//    $username="root";
+//    $password="";
   
 
 
-    try{
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+//     try{
+//         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 
-        $sql10= "CALL calculaImporte(:id_receta, @total)";
-        $importe= $pdo->prepare($sql10);
-        $importe->bindParam(':id_receta',$id_receta, PDO::PARAM_INT);
-        $importe->execute();
-        $importe->closeCursor();
+//         $sql10= "CALL calculaImporte(:id_receta, @total)";
+//         $importe= $pdo->prepare($sql10);
+//         $importe->bindParam(':id_receta',$id_receta, PDO::PARAM_INT);
+//         $importe->execute();
+//         $importe->closeCursor();
         
         
-        $row2 = $pdo->query("SELECT @total AS total")->fetch(PDO::FETCH_ASSOC);
-                if ($row2) {
-                    return $row2 !== false ? $row2['total'] : null;
-                }
+//         $row2 = $pdo->query("SELECT @total AS total")->fetch(PDO::FETCH_ASSOC);
+//                 if ($row2) {
+//                     return $row2 !== false ? $row2['total'] : null;
+//                 }
                
         
-        echo $row2['total'];
-    }
-        catch (PDOException $e) {
-            die("Error occurred:" . $e->getMessage());
-        }
-        return null;
+//         echo $row2['total'];
+//     }
+//         catch (PDOException $e) {
+//             die("Error occurred:" . $e->getMessage());
+//         }
+//         return null;
     
         
-}
+// }
 
 
 
-$miImporte=getImporte($id_receta);
-$insertado="UPDATE recetas set importe_total=:importe_total WHERE id_receta=:id_receta";
-$stmt10 = $pdo->prepare($insertado); 
-$stmt10->execute(['importe_total'=>$miImporte, 'id_receta'=>$id_receta]);
+// $miImporte=getImporte($id_receta);
+// $insertado="UPDATE recetas set importe_total=:importe_total WHERE id_receta=:id_receta";
+// $stmt10 = $pdo->prepare($insertado); 
+// $stmt10->execute(['importe_total'=>$miImporte, 'id_receta'=>$id_receta]);
 
 $sql = "SELECT * FROM recetas where  id_receta = ?";
 $q=$pdo->prepare($sql);
@@ -99,6 +104,7 @@ WHERE r.id_receta=? AND ra.id_receta=r.id_receta AND ra.id_articulos_proveedores
 $q=$pdo->prepare($sql4);
 $q->execute(array($id_receta));
 $articulos = $q->fetchAll(PDO::FETCH_ASSOC); 
+$_SESSION['receta']=$id_receta; 
 
 
 
@@ -150,10 +156,15 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
 
     <form action="detalleRecetaCocinero.php" method="post">
             <div class="md-form mb-5">
-            <input type="text" id="defaultForm-email" class="form-control validate" name="rendimiento" >
+            <input type="text" id="defaultForm-email" class="form-control validate" name="rendimiento2" >
             <label data-error="wrong" data-success="right" for="defaultForm-email">Rendimiento</label>
             </div>
-        </form>
+            <input type="text" id="defaultForm-email" class="form-control validate" name="id_receta" hidden value="<?php echo $id_receta ?>">
+
+            <div class="modal-footer d-flex justify-content-center">
+        <button type="submit"  class="btn btn-default">Usar</button>
+      </div>
+    </form>
 
     <div class="table-responsive">  
 			<table id="articulos" class="table table-striped table-bordered">  
@@ -162,18 +173,34 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
 						<th>Nombre</th>
 						<th>Gramaje</th>
 						<th>Unidad medida</th>
-                        <th>Costo unitario</th>
-                        <th>Costo total</th>
+                        <th>Rendimiento</th>
+
 					</tr>  
 				</thead>  
 				 <?php foreach ($articulos as $articulo): ?> 
 					
 					<tr>
 						<td> <?=$articulo['nombre']?></td>
-						<td> <?=$articulo['gramaje']*$articulo['rendimiento']?></td>
+
+                        <?php if($rendimiento2==0) : ?>
+                            <td> <?=$articulo['gramaje']*$articulo['rendimiento']?></td>
+                        <?php else : ?>
+                            <td> <?=$articulo['gramaje']*$rendimiento2?></td>
+                        <?php endif; ?>
+
 						<td> <?=$articulo['unidad_medida']?></td>
-                        <td> $<?=$articulo['precio']?>.00</td>
-                        <td>$<?=$articulo['costo_total']?></td>
+                      
+                        
+                        <?php if($rendimiento2==0) : ?>
+                            <td> 1</td>
+                        <?php else : ?>
+                            <td> <?=$rendimiento2?></td>
+                        <?php endif; ?>
+                        
+                        
+                        
+                        
+
 					</tr>
 
 				<?php endforeach; ?> 
@@ -181,9 +208,6 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <br>
         <hr class="my-2">
-        <div class="text-right">
-        <p class="lead">  <strong>Importe:</strong> $<?= $miImporte?></p>
-        </div>
        
 
     <p>
@@ -202,9 +226,8 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
         <strong>Preparación:</strong>
     </p>
     <p class="lead">  <?=ucfirst($receta['preparacion'])?></p>
-    <div class="modal-footer d-flex justify-content-center">
-        <button type="submit"  class="btn btn-default">Usar</button>
-      </div>
+
+   
     
 </div>
 </div>
