@@ -66,6 +66,8 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
         $pdo->rollback(); 
         throw $e;  
     } 
+
+    
 }
 
 
@@ -115,6 +117,9 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
 
         <div class="modal-footer d-flex justify-content-center">
         <button type="submit"  class="btn ">Agregar</button>
+
+
+        <button><a href="detalleReceta.php?id_receta=<?=$id_receta?>"  >Ver receta</></button>
     </div>
 </form>
 
