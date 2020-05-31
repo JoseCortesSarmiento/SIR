@@ -14,7 +14,7 @@ include 'global/header.php';
 
 
 
-     if (isset($_GET["id_usuario"])) {
+     if (isset($_GET["id_usuario"]) && $_SESSION['usuario']['rol'] == 1) {
         try {
       
           $id = $_GET["id_usuario"];
