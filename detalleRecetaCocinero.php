@@ -20,7 +20,7 @@ if ( !empty($_POST)) {
     echo "eL NUEVO RENDIMIENTO ES ".$rendimiento2;
     echo "El id de la receta es  ".$id_receta;
 
-    $sql4="SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total, r.rendimiento, a.id_articulo
+    $sql4="SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total, r.rendimiento, a.id_articulo, a.stock_almacenado
     FROM articulos a, recetas_articulos ra, recetas r, articulos_proveedores ap
     WHERE r.id_receta=? AND ra.id_receta=r.id_receta AND ra.id_articulos_proveedores=ap.id_articulos_proveedores AND ap.id_articulo=a.id_articulo";
 
@@ -62,7 +62,7 @@ if ( !empty($_POST)) {
     $pdo->beginTransaction();
 
     foreach ($articulos as $articulo) {
-         $disminuirStock->execute(['stock_almacenado'=>($articulo['gramaje']-($articulo['gramaje']*$rendimiento2)),'id_articulo'=>$articulo['id_articulo']]);  
+         $disminuirStock->execute(['stock_almacenado'=>($articulo['stock_almacenado']-($articulo['gramaje']*$rendimiento2)),'id_articulo'=>$articulo['id_articulo']]);  
     }
 
     $_SESSION['listado'] = array();
