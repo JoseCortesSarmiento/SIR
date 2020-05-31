@@ -8,8 +8,8 @@ include 'global/sesion.php';
 
 if (!empty($_GET['id_receta'])) { 
     $id_receta = $_REQUEST['id_receta']; 
-    //  echo $id_proveedor;
 } 
+
 $rendimiento2=0;
 
 if ( !empty($_POST)) {
@@ -17,11 +17,8 @@ if ( !empty($_POST)) {
 			
     $rendimiento2 = $_POST['rendimiento2'];
     $id_receta=$_POST['id_receta'];
-    // $id_articulo=$_POST['id_articulo'];
-
     echo "eL NUEVO RENDIMIENTO ES ".$rendimiento2;
     echo "El id de la receta es  ".$id_receta;
-    // echo "El id del articulo es".$id_articulo;
 
     $sql4="SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total, r.rendimiento, a.id_articulo
     FROM articulos a, recetas_articulos ra, recetas r, articulos_proveedores ap
@@ -40,50 +37,45 @@ if ( !empty($_POST)) {
         //  $_SESSION['listado']=array($articulo['id_articulo'] =>($rendimiento2*$articulo['gramaje']));
          echo $articulo['nombre'];
 
-
+        //agrego los productos de la receta  a mi session de listado
          if (isset($_SESSION['listado']) && is_array($_SESSION['listado'])) {
             if (!array_key_exists($articulo['id_articulo'], $_SESSION['listado'])) {
-                // Product is not in cart so add it
+                // el articulo no existe en mi listado
                 $_SESSION['listado'][$articulo['id_articulo']] = $rendimiento2*$articulo['gramaje'];
             } else {
                 
                
             }
         } else {
-            // There are no products in cart, this will add the first product to cart
+            // agregar el primer articulo
             $_SESSION['listado']=array($articulo['id_articulo'] =>($rendimiento2*$articulo['gramaje']));
         }
 
-
-
-        
     }
 
-    print_r($_SESSION)['listado'];
-    // $gramajeXrendimiento=$
 
-     
-        // try{ 
-        //     $pdo->beginTransaction(); 
-        //     $sql2 = "UPDATE recetas set rendimiento =:rendimiento,    WHERE id_receta =:id_receta"; 
-        //     $stmt = $pdo->prepare($sql2); 
-        //     $stmt->execute(['rendimiento'=>$rendimiento,  'id_receta'=>$id_receta]); 
-        //     // $stmt->debugDumpParams(); 
-        //     echo '<script type="text/javascript">'; 
-        //     echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha actualizado el producto","success");'; 
-        //     echo '}, 500);</script>'; 
-        //     $pdo->commit(); 
-        // } 
-        // catch(Exception $e){ 
-        //     $pdo->rollback(); 
-        //     // $stmt->debugDumpParams(); 
-        //     echo '<script type="text/javascript">'; 
-        //     echo 'setTimeout(function () { swal("¡ERROR!","El producto no pudo ser actualizado","error");'; 
-        //     echo '}, 500);</script>'; 
-        //     throw $e;  
-        // } 
-        // // it takes me to the stock page, once I updated a product 
-        //  header('location: articulos.php');
+
+    try{
+
+    $disminuirStock =  $pdo->prepare("UPDATE articulos SET stock_almacenado = :stock_almacenado WHERE id_articulo = :id_articulo");
+
+    $pdo->beginTransaction();
+
+    foreach ($articulos as $articulo) {
+         $disminuirStock->execute(['stock_almacenado'=>($articulo['gramaje']-($articulo['gramaje']*$rendimiento2)),'id_articulo'=>$articulo['id_articulo']]);  
+    }
+
+    $_SESSION['listado'] = array();
+    $pdo->commit(); 
+    print_r($_SESSION)['listado'];
+
+     }
+        catch(Exception $e){
+        if($pdo->inTransaction()) $pdo->rollback(); //  Si fallo la insercion en la transaccion .. rollback
+        $errores = 1;  // Mostramos el error en pantalla y matamos la ejecución
+        // var_dump($e);
+    }
+   
 
 }
 
