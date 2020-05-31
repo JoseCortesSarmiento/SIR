@@ -1,5 +1,9 @@
 <?php 
 // include 'articuloExistente.php';
+  if($_SESSION['usuario']['rol']!=1){
+        
+        header("location:home.php");
+  }
 
 	if ( !empty($_POST)) {
 		
