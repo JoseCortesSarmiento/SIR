@@ -17,8 +17,29 @@ if ( !empty($_POST)) {
 			
     $rendimiento2 = $_POST['rendimiento2'];
     $id_receta=$_POST['id_receta'];
+    // $id_articulo=$_POST['id_articulo'];
+
     echo "eL NUEVO RENDIMIENTO ES ".$rendimiento2;
     echo "El id de la receta es  ".$id_receta;
+    // echo "El id del articulo es".$id_articulo;
+
+    $sql4="SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total, r.rendimiento, a.id_articulo
+    FROM articulos a, recetas_articulos ra, recetas r, articulos_proveedores ap
+    WHERE r.id_receta=? AND ra.id_receta=r.id_receta AND ra.id_articulos_proveedores=ap.id_articulos_proveedores AND ap.id_articulo=a.id_articulo";
+
+    $q=$pdo->prepare($sql4);
+    $q->execute(array($id_receta));
+    $articulos = $q->fetchAll(PDO::FETCH_ASSOC); 
+
+    $_SESSION['listado'] = array();
+
+    foreach ($articulos as $articulo){
+        echo "adios";
+         $_SESSION['listado']=array($articulo['id_articulo'] =>($rendimiento2*$articulo['gramaje']));
+        
+    }
+
+    print_r($_SESSION)['listado'];
     // $gramajeXrendimiento=$
 
      
@@ -97,7 +118,7 @@ $q=$pdo->prepare($sql);
 $q->execute(array($id_receta));
 $receta = $q->fetch(PDO::FETCH_ASSOC); 
 
-$sql4="SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total, r.rendimiento
+$sql4="SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total, r.rendimiento, a.id_articulo
 FROM articulos a, recetas_articulos ra, recetas r, articulos_proveedores ap
 WHERE r.id_receta=? AND ra.id_receta=r.id_receta AND ra.id_articulos_proveedores=ap.id_articulos_proveedores AND ap.id_articulo=a.id_articulo";
 
@@ -105,6 +126,8 @@ $q=$pdo->prepare($sql4);
 $q->execute(array($id_receta));
 $articulos = $q->fetchAll(PDO::FETCH_ASSOC); 
 $_SESSION['receta']=$id_receta; 
+
+
 
 
 
@@ -160,12 +183,7 @@ $_SESSION['receta']=$id_receta;
             <label data-error="wrong" data-success="right" for="defaultForm-email">Rendimiento</label>
             </div>
             <input type="text" id="defaultForm-email" class="form-control validate" name="id_receta" hidden value="<?php echo $id_receta ?>">
-
-            <div class="modal-footer d-flex justify-content-center">
-        <button type="submit"  class="btn btn-default">Usar</button>
-      </div>
-    </form>
-
+            
     <div class="table-responsive">  
 			<table id="articulos" class="table table-striped table-bordered">  
 				<thead>  
@@ -180,7 +198,7 @@ $_SESSION['receta']=$id_receta;
 				 <?php foreach ($articulos as $articulo): ?> 
 					
 					<tr>
-						<td> <?=$articulo['nombre']?></td>
+						<td> <?=$articulo['nombre']?>   <input type="text" id="defaultForm-email" class="form-control validate" name="id_articulo" hidden value="<?php  $articulo['id_articulo'] ?>"></td>
 
                         <?php if($rendimiento2==0) : ?>
                             <td> <?=$articulo['gramaje']*$articulo['rendimiento']?></td>
@@ -204,7 +222,12 @@ $_SESSION['receta']=$id_receta;
 			</table>  
         </div>
         <br>
-        <hr class="my-2">
+       
+            <div class="modal-footer d-flex justify-content-center">
+        <button type="submit"  class="btn btn-default">Usar</button>
+      </div>
+    </form>
+
        
 
     <p>
