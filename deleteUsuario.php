@@ -2,19 +2,14 @@
 
 include 'global/config.php';
 include 'global/conexion.php';
+include 'template/head.php';
 
 if($_SESSION['usuario']['rol']!=1){
         
         header("location:home.php");
-}
-
-include 'global/header.php';
-
-
-
-
-
-     if (isset($_GET["id_usuario"]) && $_SESSION['usuario']['rol'] == 1) {
+}else{
+  print_r("ando entrando");
+     if (isset($_GET["id_usuario"])) {
         try {
       
           $id = $_GET["id_usuario"];
@@ -37,5 +32,14 @@ include 'global/header.php';
       }
       
       header('location: usuarios.php');
+
+
+}
+
+include 'global/header.php';
+
+
+
+
 
 ?>
