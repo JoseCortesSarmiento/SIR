@@ -198,9 +198,6 @@ $_SESSION['receta']=$id_receta;
                         <?php endif; ?>
                         
                         
-                        
-                        
-
 					</tr>
 
 				<?php endforeach; ?> 
