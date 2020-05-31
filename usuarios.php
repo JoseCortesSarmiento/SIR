@@ -1,12 +1,23 @@
 <?php 
+
+
+?>
+
+<?php 
 //Mostrar errores en linux
 ini_set("display_errors", "1");
 error_reporting(E_ALL);
+
 
 include 'global/config.php';
 include 'global/conexion.php';
 include 'global/sesion.php';
 include 'templates/head.php';
+
+if($_SESSION['usuario']['rol']!=1){
+        
+        header("location:home.php");
+}
 include 'addUsuario.php';
 ?>
 

@@ -2,6 +2,14 @@
 //Mostrar errores en linux
 ini_set("display_errors", "1");
 error_reporting(E_ALL);
+session_start();
+
+if(!isset($_SESSION['usuario'])){
+    echo "redirigir al login .... no hay usuario";
+    header('Location: index.php');
+}{
+    print_r($_SESSION['usuario']);
+}
 include 'global/header.php';
 ?>
 <!--Navbar -->
@@ -14,12 +22,13 @@ include 'global/header.php';
   <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home
+        <a class="nav-link" href="home.php">Home
           <span class="sr-only">(current)</span>
         </a>
       </li>
 
-      <li class="nav-item">
+    <?php if($_SESSION['usuario']['rol'] == 1 ) {?>
+       <li class="nav-item">
         <a class="nav-link" href="usuarios.php">Usuarios</a>
       </li>
 
@@ -35,14 +44,16 @@ include 'global/header.php';
         <a class="nav-link" href="recetas.php">Recetas</a>
       </li>
 
+     <li class="nav-item">
+     <a class="nav-link" href="historial.php">Historial</a>
+     </li>
+      
+    <?php } ?>
+
       <li class="nav-item">
         <a class="nav-link" href="recetasCocinero.php">Recetas Cocinero</a>
       </li>
 
-
-     <li>
-     <a class="nav-link" href="historial.php">Historial</a>
-     </li>
     </ul>
 
     <ul class="navbar-nav ml-auto nav-flex-icons">
