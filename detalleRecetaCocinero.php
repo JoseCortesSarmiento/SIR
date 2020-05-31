@@ -35,7 +35,27 @@ if ( !empty($_POST)) {
 
     foreach ($articulos as $articulo){
         echo "adios";
-         $_SESSION['listado']=array($articulo['id_articulo'] =>($rendimiento2*$articulo['gramaje']));
+
+        
+        //  $_SESSION['listado']=array($articulo['id_articulo'] =>($rendimiento2*$articulo['gramaje']));
+         echo $articulo['nombre'];
+
+
+         if (isset($_SESSION['listado']) && is_array($_SESSION['listado'])) {
+            if (!array_key_exists($articulo['id_articulo'], $_SESSION['listado'])) {
+                // Product is not in cart so add it
+                $_SESSION['listado'][$articulo['id_articulo']] = $rendimiento2*$articulo['gramaje'];
+            } else {
+                
+               
+            }
+        } else {
+            // There are no products in cart, this will add the first product to cart
+            $_SESSION['listado']=array($articulo['id_articulo'] =>($rendimiento2*$articulo['gramaje']));
+        }
+
+
+
         
     }
 
