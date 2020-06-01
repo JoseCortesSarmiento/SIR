@@ -7,7 +7,7 @@ if($_SESSION['usuario']['rol']!=1){
         
         header("location:home.php");
 }
-
+$id_session = $_SESSION['usuario']['id_usuario'];
 	if ( !empty($_POST)) {
 		
 		// keep track post values		
@@ -17,10 +17,19 @@ if($_SESSION['usuario']['rol']!=1){
         $estatus = $_POST['estatus'];
         $rol = $_POST['rol'];
         
-        $sql = "INSERT INTO usuarios ( correo, contra, nombre, estatus, rol) values(?, crypt(?, gen_salt('md5')), ?, ?, ?)";
+        $sql = "INSERT INTO usuarios ( correo, contra, nombre, estatus, rol) values(?, crypt(?, gen_salt('md5')), ?, ?, ?) RETURNING id_usuario;";
 			$stmt = $conn->prepare($sql);
-            $stmt->execute([$correo, $contra, $nombre, $estatus, $rol]);	
-            
+            $stmt->execute([$correo, $contra, $nombre, $estatus, $rol]);
+           
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        $id_usuario = $resultado['id_usuario'];
+        
+
+        $sql = "INSERT INTO historial (id_usuario, descripcion.primer_texto, descripcion.numero_usuario, descripcion.segundo_texto, descripcion.tercer_texto, fecha)
+        VALUES (?, 'El usuario ' , ? , ' ha agregado un  nuevo usuario','', CURRENT_TIMESTAMP);";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$id_usuario, $id_session]);    
+                
             echo '<script type="text/javascript">'; 
             echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha agregado un nuevo usuario","success");'; 
             echo '}, 500);</script>'; 
