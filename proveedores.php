@@ -60,7 +60,15 @@ $proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
             <td> <?=$proveedor['direccion']?></td>
             <td>
 
-            <span style="font-size: 32px; color: darkturquoise;">
+
+            <?php if($proveedor['nombre']=='na') : ?>
+                <span style="font-size: 32px; color: darkturquoise;">
+                <a href="updateProveedores.php?id_proveedor=
+                <?=$proveedor['id_proveedor']?>"
+                class="btn btn-default btn-rounded mb-4"  > 
+                <i class="fas fa-edit"></i></a>
+            <?php else : ?>
+                <span style="font-size: 32px; color: darkturquoise;">
                 <a href="updateProveedores.php?id_proveedor=
                 <?=$proveedor['id_proveedor']?>"
                 class="btn btn-default btn-rounded mb-4"  > 
@@ -72,6 +80,13 @@ $proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 class="btn btn-red btn-rounded mb-4" > 
                 <i class="fas fa-trash-alt"></i></a>
             </span>  
+            <?php endif; ?>
+
+           
+
+
+
+
             </td>
         </tr>
     <?php endforeach; ?>

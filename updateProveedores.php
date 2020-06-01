@@ -68,7 +68,13 @@ else {
 
         
 
-<div class="container"  style="margin-top:10vh;">
+ <div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+
+
+
+
+<div class="container"  style="margin-top:10vh; margin-bottom:10vh;">
 
 
 <div class="card" >
@@ -92,7 +98,7 @@ else {
 
                 <div class="md-form mb-5">
                 <input type="text" class="form-control validate" name="telefono" value="<?php echo !empty($telefono)?$telefono:''; ?>">
-                <label data-error="wrong" data-success="right" >Correo</label>
+                <label data-error="wrong" data-success="right" >Teléfono</label>
                 </div>
 
                 <div class="md-form mb-5">
@@ -121,3 +127,9 @@ else {
 
 </div>
     
+
+
+
+
+
+</div>

@@ -25,14 +25,23 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
-<!DOCTYPE html>  
-<html>  
-<head>  
-	<title>Artículos</title>  
-</head>  
-<body>  
-	<br /><br />  
-	<div class="container">  
+
+
+
+
+<div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+	
+	
+	
+	<div class="container" style="margin-top:10vh;margin-bottom:10vh; ">  
+		<div class="card">
+		
+		
+		
+		<div class="card-body">
+		
+		
 		<h3 align="center">Artículos</h3>  
 		<br />  
 		<a href="articuloExistente.php" class="text-decoration-none">Agregar proveedor nuevo a artículo ya existente</a>
@@ -81,13 +90,21 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 				<?php endforeach; ?>
 			</table>  
 
-            <div class="text-center">
-  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalAddArticulo">Agregar articulo</a>
-</div>
-		</div>  
+			<div class="text-center">
+			<a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalAddArticulo">Agregar articulo</a>
+			</div>
+			</div>  
+		
+		
+		</div>
+		
+		
+		
+		
+		</div>
 	</div>  
-</body>  
-</html>  
+
+</div>
 <script>  
 	$(document).ready(function(){  
 		$('#articulos').DataTable();  
