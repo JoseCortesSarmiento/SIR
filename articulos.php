@@ -44,7 +44,6 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 		
 		<h3 align="center">Artículos</h3>  
 		<br />  
-		<a href="articuloExistente.php" class="text-decoration-none">Agregar proveedor nuevo a artículo ya existente</a>
 		<div class="table-responsive">  
 			<table id="articulos" class="table table-striped table-bordered">  
 				<thead>  
@@ -65,7 +64,7 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 					
 					<tr>
 						<td> <?=$articulo['nombre']?></td>
-						<td> <?=$articulo['precio']?></td>
+						<td>$ <?=$articulo['precio']?></td>
 						<td> <?=$articulo['unidad_medida']?></td>
 						<td> <?=$articulo['stock_minimo']?></td>
 						<td> <?=$articulo['stock_almacenado']?></td>
@@ -89,16 +88,22 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
 				<?php endforeach; ?>
 			</table>  
+			
 
 			<div class="text-center">
 			<a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalAddArticulo">Agregar articulo</a>
 			</div>
 			</div>  
 		
-		
+			<!-- <a href="articuloExistente.php" class="text-decoration-none">Agregar proveedor nuevo a artículo ya existente</a> -->
+				   
+			
 		</div>
+		<hr>
 		
-		
+		<div class="text-center">
+				<a class="btn btn-purple btn-rounded mb-4" href="articuloExistente.php">Agregar proveedor/articulo</a>
+				</div>
 		
 		
 		</div>

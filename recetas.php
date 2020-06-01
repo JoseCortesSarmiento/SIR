@@ -21,10 +21,20 @@ if($_SESSION['usuario']['rol']!=1){
     $arr = $sentencia->errorInfo();
     print_r($arr);
 ?>
-<br />
-<br />  
-	<div class="container">  
-		<h3 align="center">Recetas</h3>  
+
+<div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+    
+    
+    <div class="container" style="margin-top:10vh;margin-bottom:10vh; ">  
+<div class="card">
+
+
+<div class="card-body">
+
+
+
+<h3 align="center">Recetas</h3>  
 		<br />  
 		<div class="table-responsive">  
 
@@ -72,7 +82,18 @@ if($_SESSION['usuario']['rol']!=1){
   <a href="addReceta.php" class="btn btn-default btn-rounded mb-4" >Agregar receta</a>
 </div>
 </div>  
+
+
+</div>
+
+
+
+</div>
 	</div> 
+    
+    
+    
+    </div>
 <script>  
 	$(document).ready(function(){  
 		$('#recetas').DataTable();  

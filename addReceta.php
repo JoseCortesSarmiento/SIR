@@ -104,7 +104,11 @@ if ( !empty($_POST)) {
 
 ?>
 
-<div class="container">
+<div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+
+
+<div class="container"  style="margin-top:10vh; margin-bottom:10vh;">
 <div class="jumbotron">
 <h2 class="h1-responsive text-center" >Agregar nueva receta</h2>
     <br>
@@ -142,7 +146,7 @@ if ( !empty($_POST)) {
             <label data-error="wrong" data-success="right">Foto platillo</label>
     </div>
    
-    <hr class="my-2">
+    <!-- <hr class="my-2"> -->
 
 
    
@@ -153,7 +157,7 @@ if ( !empty($_POST)) {
         <label for="form23">Presentación</label>
     </div>
 
-    <hr class="my-2">
+    <!-- <hr class="my-2"> -->
     <div class="md-form mb-4 pink-textarea active-pink-textarea-2">
         <i class="fas fa-angle-double-right prefix"></i>
         <textarea  class="md-textarea form-control" rows="7" name="mise_en_place"></textarea>
@@ -161,7 +165,7 @@ if ( !empty($_POST)) {
     </div>
 
 
-    <hr class="my-2">
+    <!-- <hr class="my-2"> -->
     <div class="md-form mb-4 pink-textarea active-pink-textarea-2">
         <i class="fas fa-angle-double-right prefix"></i>
         <textarea id="form23" class="md-textarea form-control" rows="7" name="preparacion"></textarea>
@@ -169,8 +173,10 @@ if ( !empty($_POST)) {
     </div>
 
     <div class="modal-footer d-flex justify-content-center">
-        <button type="submit"  class="btn ">Agregar</button>
+        <button type="submit"  class="btn btn-default ">Agregar</button>
     </div>
+
+    
 
 </form>
 
@@ -178,6 +184,11 @@ if ( !empty($_POST)) {
 </div>
 </div>
 
+
+
+
+
+</div>
 
     
  

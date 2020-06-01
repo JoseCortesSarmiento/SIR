@@ -101,7 +101,7 @@
 
          <div class="md-form mb-5">
         <select class="browser-default custom-select" name="proveedor">
-            <option selected>Elija un proveedor</option>
+            <!-- <option selected>Elija un proveedor</option> -->
             <?php 
 					   						 
 					   						$query = 'SELECT * FROM proveedores'; 

@@ -63,7 +63,9 @@ if ( !empty($_POST)) {
 
 ?>
 
-<div class="container">
+<div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+<div class="container" style="margin-top:10vh; margin-bottom:10vh;">
 <div class="jumbotron">
 <h2 class="h1-responsive text-center" >Actualizar receta</h2>
     <br>
@@ -128,7 +130,7 @@ if ( !empty($_POST)) {
     </div>
 
     <div class="modal-footer d-flex justify-content-center">
-        <button type="submit"  class="btn ">Actualizar</button>
+        <button type="submit"  class="btn btn-default ">Actualizar</button>
     </div>
 
 </form>
@@ -137,6 +139,7 @@ if ( !empty($_POST)) {
 </div>
 </div>
 
+</div>
 
     
  

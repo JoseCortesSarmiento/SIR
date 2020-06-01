@@ -81,12 +81,6 @@ $proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 <i class="fas fa-trash-alt"></i></a>
             </span>  
             <?php endif; ?>
-
-           
-
-
-
-
             </td>
         </tr>
     <?php endforeach; ?>
