@@ -62,6 +62,10 @@ include 'global/header.php';
 
     <ul class="navbar-nav ml-auto nav-flex-icons">
         <li class="nav-item">
+            <a class="nav-link" href="backup_precios.php">Backup Precios</a>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link" href="logout.php">Salir</a>
         </li>
     </ul>
