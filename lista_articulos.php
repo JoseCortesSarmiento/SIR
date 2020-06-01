@@ -48,7 +48,7 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 		<h3 align="center">Lista de Compras</h3>  
 		<br />  
 		<div class="table-responsive">  
-			<table id="articulos" class="table table-striped table-bordered">  
+			<table id="lista_articulos" class="table table-striped table-bordered">  
 				<thead>  
 					<tr>  
 						<th>Nombre</th>
@@ -89,6 +89,6 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 </div>
 <script>  
 	$(document).ready(function(){  
-		$('#articulos').DataTable();  
+		$('#lista_articulos').DataTable();  
 	}); 
 </script>  
