@@ -47,6 +47,10 @@ include 'global/header.php';
      <li class="nav-item">
      <a class="nav-link" href="historial.php">Historial</a>
      </li>
+
+     <li class="nav-item">
+     <a class="nav-link" href="lista_articulos.php">Lista de Compras</a>
+     </li>
       
     <?php } ?>
 
@@ -57,6 +61,10 @@ include 'global/header.php';
     </ul>
 
     <ul class="navbar-nav ml-auto nav-flex-icons">
+        <li class="nav-item">
+            <a class="nav-link" href="backup_precios.php">Backup Precios</a>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link" href="logout.php">Salir</a>
         </li>
