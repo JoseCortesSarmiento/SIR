@@ -68,10 +68,10 @@ else {
 
         
 
-<div class="container">
+<div class="container"  style="margin-top:10vh;">
 
 
-<div class="card" style="width: 50rem;">
+<div class="card" >
         <div class="card-body">
             <div class="md-form mb-5">
 

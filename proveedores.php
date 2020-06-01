@@ -26,9 +26,19 @@ $sentencia->execute();
 $proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <br />
-<br />  
-	<div class="container">  
-		<h3 align="center">Proveedores</h3>  
+<br /> 
+
+<div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+
+
+
+<div class="container" style="margin-top:10vh;margin-bottom:10vh; " >  
+<div class="card">
+
+		<div class="card-body">
+        <br>
+        <h3 align="center">Proveedores</h3>  
 		<br />  
 		<div class="table-responsive">  
 
@@ -66,19 +76,38 @@ $proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
         </tr>
     <?php endforeach; ?>
 </table>
+        
+        
+        
+        </div>
 <div class="text-center">
   <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" 
   data-target="#modalAddProveedor">Agregar proveedor</a>
 </div>
-<div class="text-center">
-  <a class="btn btn-default btn-rounded mb-4" href="backupProveedores.php">Backup</a>
+<hr>
+<div class="text-left">
+  <a class="btn btn-purple btn-rounded mb-4" href="backupProveedores.php">Backup</a>
 </div>
 </div>  
 	</div> 
+
+
+
+
+
+
+
+</div>
+
+
+
+</div>
 <script>  
 	$(document).ready(function(){  
 		$('#proveedores').DataTable();  
 	}); 
 </script>  
+
+
 
 
