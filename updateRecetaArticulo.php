@@ -128,8 +128,17 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
         <button type="submit"  class="btn  btn-default">Agregar</button>
 
 
-        <button><a href="detalleReceta.php?id_receta=<?=$id_receta?>" > Ver receta</a></button>
+        
     </div>
+
+    <div class="text-right">
+   
+   <span style="font-size: 32px; color: tomato;">
+                <a href="detalleReceta.php?id_receta=<?=$id_receta?>" 
+                class="btn btn-secondary-color btn-rounded mb-4" > 
+                <i class="fas fa-eye"></i></a>
+    </span> 
+   </div>
 </form>
 
 </div>
