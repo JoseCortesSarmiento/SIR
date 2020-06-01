@@ -2,6 +2,12 @@ db.backup.insertOne(
 {nombre: “test”, correo: “test@mail.com”, telefono: “1234567”, direccion: "Avenida Test"}
 )
 
+db.backup.insertOne(
+{id_receta: "1", nombre_platillo: "nombrePlatillo", foto_receta: "link", codigo: "234234",
+ categoria: "cocktail", rendimiento: "1", articulos: "", presentacion: "test", mise_en_place: "test",
+ preparacion: "test"}
+)
+
 <?php
 require_once 'config.php';
 

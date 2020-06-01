@@ -183,6 +183,9 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
     <p class="lead">  <?=ucfirst($receta['preparacion'])?></p>
    
     <a class="btn btn-primary btn-lg" role="button" href="recetas.php">Ver todas</a>
+    <div class="text-center">
+  <a class="btn btn-default btn-rounded mb-4" href="backupDetalleRecetas.php?id_receta=<?=$receta['id_receta']?>">Backup</a>
+</div>
 </div>
 </div>
 
