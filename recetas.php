@@ -53,7 +53,7 @@ if($_SESSION['usuario']['rol']!=1){
             <td> <?=$receta['codigo']?></td>
             <td> <?=$receta['nombre_platillo']?></td>
             <td> <?=$receta['categoria']?></td>
-            <td> <?=$receta['importe_total']?></td>
+            <td>$ <?=$receta['importe_total']?></td>
             <td>
 
             <span style="font-size: 32px; color: darkturquoise;">

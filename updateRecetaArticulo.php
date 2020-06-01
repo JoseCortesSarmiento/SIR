@@ -74,9 +74,17 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
 
 ?>
 
-<div class="container">
+<div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+
+
+<div class="container" style="margin-top:10vh;margin-bottom:50vh; ">
 
     
+<div class="card">
+
+<div class="card-body">
+
 <form action="articuloReceta.php" method="post">
 
 <div class="table-responsive">  
@@ -117,13 +125,18 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
 
 
         <div class="modal-footer d-flex justify-content-center">
-        <button type="submit"  class="btn ">Agregar</button>
+        <button type="submit"  class="btn  btn-default">Agregar</button>
 
 
         <button><a href="detalleReceta.php?id_receta=<?=$id_receta?>" > Ver receta</a></button>
     </div>
 </form>
 
+</div>
+
+</div>
+
+</div>
 
 </div>
 <script>  
