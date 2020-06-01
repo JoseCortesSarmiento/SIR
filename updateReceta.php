@@ -7,50 +7,11 @@ if($_SESSION['usuario']['rol']!=1){
         header("location:home.php");
 }
 
-// $miCodigo;
-
-
-
-function getCodigo(){
-
-    $host= "localhost";
-    $dbname= "sistemarest";
-    $username="root";
-    $password="";
-   
- 
- 
-     try{
-         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
- 
-         $obtenerCodigo= "CALL obtenerCodigoReceta2(@codigo)";
-         $codigo= $pdo->prepare($obtenerCodigo);
-         $codigo->execute();
-         $codigo->closeCursor();
-         
-         
-         $row2 = $pdo->query("SELECT @codigo AS codigo")->fetch(PDO::FETCH_ASSOC);
-                 if ($row2) {
-                     return $row2 !== false ? $row2['codigo'] : null;
-                 }
-                
-         
-         echo $row2['codigo'];
-     }
-         catch (PDOException $e) {
-             die("Error occurred:" . $e->getMessage());
-         }
-         return null;
-     
-         
- }
-
- $miCodigo=getCodigo();
- echo "Mi codigo es".$miCodigo;
-
 
 if ( !empty($_POST)) {
-    	
+    
+		
+    // keep track post values		
     $nombre = $_POST['nombre'];
     $foto_receta=$_POST['foto_receta'];
     $categoria = $_POST['categoria'];
@@ -58,7 +19,7 @@ if ( !empty($_POST)) {
     $mise_en_place=$_POST['mise_en_place'];
     $preparacion=$_POST['preparacion'];
     $rendimiento=$_POST['rendimiento'];
-    $codigo= $_POST['codigo'];
+    $codigo=$_POST['codigo'];
 
     echo $nombre;
     echo $foto_receta;
@@ -115,7 +76,7 @@ if ( !empty($_POST)) {
     </div>
 
     <div class="md-form mb-5">
-            <input type="text"  class="form-control validate" value="<?php echo  $miCodigo=getCodigo();?>" name="codigo" hidden>
+            <input type="text"  class="form-control validate" value=10 name="codigo" hidden>
     </div>
     <div class="text-left">       
           <div class="md-form mb-5">

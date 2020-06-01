@@ -141,11 +141,6 @@ $_SESSION['receta']=$id_receta;
           <p>
             <strong>Categoria:</strong> <?= ucfirst($receta['categoria'])?>
           </p>
-
-
-         
-       
-          
     </div>
     <hr>
     <div class="row">
