@@ -8,12 +8,12 @@ if($_SESSION['usuario']['rol']!=1){
         
         header("location:home.php");
 }else{
- if (isset($_GET["id_articulos_proveedores"])) {
+ if (isset($_GET["id_articulo"])) {
         try {
       
-          $id = $_GET["id_articulos_proveedores"];
+          $id = $_GET["id_articulo"];
       
-          $sql = "DELETE FROM articulos_proveedores WHERE id_articulos_proveedores= :id";
+          $sql = "DELETE FROM articulos WHERE id_articulo= :id";
       
           $statement = $pdo->prepare($sql);
           $statement->bindValue(':id', $id);

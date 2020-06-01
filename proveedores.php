@@ -26,9 +26,19 @@ $sentencia->execute();
 $proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <br />
-<br />  
-	<div class="container">  
-		<h3 align="center">Proveedores</h3>  
+<br /> 
+
+<div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+
+
+
+<div class="container" style="margin-top:10vh;margin-bottom:50vh; " >  
+<div class="card">
+
+		<div class="card-body">
+        <br>
+        <h3 align="center">Proveedores</h3>  
 		<br />  
 		<div class="table-responsive">  
 
@@ -50,7 +60,15 @@ $proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
             <td> <?=$proveedor['direccion']?></td>
             <td>
 
-            <span style="font-size: 32px; color: darkturquoise;">
+
+            <?php if($proveedor['nombre']=='na') : ?>
+                <span style="font-size: 32px; color: darkturquoise;">
+                <a href="updateProveedores.php?id_proveedor=
+                <?=$proveedor['id_proveedor']?>"
+                class="btn btn-default btn-rounded mb-4"  > 
+                <i class="fas fa-edit"></i></a>
+            <?php else : ?>
+                <span style="font-size: 32px; color: darkturquoise;">
                 <a href="updateProveedores.php?id_proveedor=
                 <?=$proveedor['id_proveedor']?>"
                 class="btn btn-default btn-rounded mb-4"  > 
@@ -62,23 +80,43 @@ $proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 class="btn btn-red btn-rounded mb-4" > 
                 <i class="fas fa-trash-alt"></i></a>
             </span>  
+            <?php endif; ?>
             </td>
         </tr>
     <?php endforeach; ?>
 </table>
+        
+        
+        
+        </div>
 <div class="text-center">
   <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" 
   data-target="#modalAddProveedor">Agregar proveedor</a>
 </div>
-<div class="text-center">
-  <a class="btn btn-default btn-rounded mb-4" href="backupProveedores.php">Backup</a>
+<hr>
+<div class="text-left">
+  <a class="btn btn-purple btn-rounded mb-4" href="backupProveedores.php">Backup</a>
 </div>
 </div>  
 	</div> 
+
+
+
+
+
+
+
+</div>
+
+
+
+</div>
 <script>  
 	$(document).ready(function(){  
 		$('#proveedores').DataTable();  
 	}); 
 </script>  
+
+
 
 

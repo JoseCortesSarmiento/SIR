@@ -7,17 +7,50 @@ if($_SESSION['usuario']['rol']!=1){
         header("location:home.php");
 }
 
+// $miCodigo;
 
-        // $sql8 ="SELECT COUNT(*) FROM recetas_articulos";
-        // $stmt8 = $pdo->prepare($sql8);
-        // $stmt8->execute();
 
-        // $codigo=$stmt8+1;
+
+function getCodigo(){
+
+    $host= "localhost";
+    $dbname= "sistemarest";
+    $username="root";
+    $password="";
+   
+ 
+ 
+     try{
+         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+ 
+         $obtenerCodigo= "CALL obtenerCodigoReceta2(@codigo)";
+         $codigo= $pdo->prepare($obtenerCodigo);
+         $codigo->execute();
+         $codigo->closeCursor();
+         
+         
+         $row2 = $pdo->query("SELECT @codigo AS codigo")->fetch(PDO::FETCH_ASSOC);
+                 if ($row2) {
+                     return $row2 !== false ? $row2['codigo'] : null;
+                 }
+                
+         
+         echo $row2['codigo'];
+     }
+         catch (PDOException $e) {
+             die("Error occurred:" . $e->getMessage());
+         }
+         return null;
+     
+         
+ }
+
+ $miCodigo=getCodigo();
+ echo "Mi codigo es".$miCodigo;
+
 
 if ( !empty($_POST)) {
-    
-		
-    // keep track post values		
+    	
     $nombre = $_POST['nombre'];
     $foto_receta=$_POST['foto_receta'];
     $categoria = $_POST['categoria'];
@@ -25,7 +58,7 @@ if ( !empty($_POST)) {
     $mise_en_place=$_POST['mise_en_place'];
     $preparacion=$_POST['preparacion'];
     $rendimiento=$_POST['rendimiento'];
-    $codigo=$_POST['codigo'];
+    $codigo= $_POST['codigo'];
 
     echo $nombre;
     echo $foto_receta;
@@ -71,7 +104,11 @@ if ( !empty($_POST)) {
 
 ?>
 
-<div class="container">
+<div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+
+
+<div class="container"  style="margin-top:10vh; margin-bottom:10vh;">
 <div class="jumbotron">
 <h2 class="h1-responsive text-center" >Agregar nueva receta</h2>
     <br>
@@ -82,7 +119,7 @@ if ( !empty($_POST)) {
     </div>
 
     <div class="md-form mb-5">
-            <input type="text"  class="form-control validate" value=10 name="codigo" hidden>
+            <input type="text"  class="form-control validate" value="<?php echo  $miCodigo=getCodigo();?>" name="codigo" hidden>
     </div>
     <div class="text-left">       
           <div class="md-form mb-5">
@@ -109,7 +146,7 @@ if ( !empty($_POST)) {
             <label data-error="wrong" data-success="right">Foto platillo</label>
     </div>
    
-    <hr class="my-2">
+    <!-- <hr class="my-2"> -->
 
 
    
@@ -120,7 +157,7 @@ if ( !empty($_POST)) {
         <label for="form23">Presentación</label>
     </div>
 
-    <hr class="my-2">
+    <!-- <hr class="my-2"> -->
     <div class="md-form mb-4 pink-textarea active-pink-textarea-2">
         <i class="fas fa-angle-double-right prefix"></i>
         <textarea  class="md-textarea form-control" rows="7" name="mise_en_place"></textarea>
@@ -128,7 +165,7 @@ if ( !empty($_POST)) {
     </div>
 
 
-    <hr class="my-2">
+    <!-- <hr class="my-2"> -->
     <div class="md-form mb-4 pink-textarea active-pink-textarea-2">
         <i class="fas fa-angle-double-right prefix"></i>
         <textarea id="form23" class="md-textarea form-control" rows="7" name="preparacion"></textarea>
@@ -136,8 +173,10 @@ if ( !empty($_POST)) {
     </div>
 
     <div class="modal-footer d-flex justify-content-center">
-        <button type="submit"  class="btn ">Agregar</button>
+        <button type="submit"  class="btn btn-default ">Agregar</button>
     </div>
+
+    
 
 </form>
 
@@ -145,6 +184,11 @@ if ( !empty($_POST)) {
 </div>
 </div>
 
+
+
+
+
+</div>
 
     
  

@@ -12,8 +12,9 @@ if($_SESSION['usuario']['rol']!=1){
         
         header("location:home.php");
 }
+    $id_session = $_SESSION['usuario']['id_usuario'];
 
-
+    
 if (!empty($_GET['id_usuario'])) { 
     $id_usuario = $_REQUEST['id_usuario']; 
 } 
@@ -26,15 +27,25 @@ if (!empty($_POST)) {
     $nombre = $_POST['nombre']; 
     $estatus = $_POST['estatus']; 
     $rol = $_POST['rol']; 
+    $nacimiento = $_POST['nacimiento'];
     $id_usuario = $_POST['id_usuario']; 
     // update data 
         try{ 
+            
             $conn->beginTransaction(); 
-
-            $sql2 = "UPDATE usuarios SET correo = :correo, contra = crypt(:contra, gen_salt('md5')), nombre = :nombre, estatus = :estatus, rol = :rol WHERE id_usuario = :id_usuario";
-
+            
+            $sql2 = "UPDATE usuarios SET correo = :correo, contra = crypt(:contra, gen_salt('md5')), nombre = :nombre, estatus = :estatus, rol = :rol, nacimiento = :nacimiento WHERE id_usuario = :id_usuario";
             $stmt = $conn->prepare($sql2); 
-            $stmt->execute(['correo'=>$correo, 'contra'=>$contra, 'nombre'=>$nombre,'estatus'=>$estatus, 'rol'=>$rol,'id_usuario'=>$id_usuario]); 
+            $stmt->execute(['correo'=>$correo, 'contra'=>$contra, 'nombre'=>$nombre,'estatus'=>$estatus, 'rol'=>$rol, 'nacimiento'=>$nacimiento,'id_usuario'=>$id_usuario]); 
+
+
+            $sql2 = "INSERT INTO historial (id_usuario, descripcion.primer_texto, descripcion.numero_usuario, descripcion.segundo_texto, descripcion.tercer_texto, fecha)
+            VALUES (?, 'El usuario ' , ? , ' ha actualizado un usuario',' ', CURRENT_TIMESTAMP);";
+            $stmt = $conn->prepare($sql2);
+            $stmt->execute([$id_usuario, $id_session]);
+
+            
+            
             echo '<script type="text/javascript">'; 
             echo 'setTimeout(function () { swal("¡ÉXITO!","Se ha actualizado el usuario","success");'; 
             echo '}, 500);</script>'; 
@@ -49,6 +60,7 @@ if (!empty($_POST)) {
  
         } 
         // it takes me to the stock page, once I updated a product 
+
          header('location: usuarios.php');
     
 }  
@@ -96,6 +108,11 @@ else {
                     <div class="md-form mb-5">
                     <input type="text"  class="form-control validate" name="nombre" value="<?php echo !empty($nombre)?$nombre:''; ?>">
                     <label data-error="wrong" data-success="right">Nombre</label>
+                    </div>
+
+                    <div class="md-form mb-5">
+                    <input type="text"  class="form-control validate" name="nacimiento" value="<?php echo !empty($nombre)?$nombre:''; ?>">
+                    <label data-error="wrong" data-success="right">Fecha de nacimiento (yyyy-mm-dd)</label>
                     </div>
 
                     <div class="md-form mb-5">

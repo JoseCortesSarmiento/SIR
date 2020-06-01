@@ -72,10 +72,14 @@ else {
  
 
         
+ <div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
 
-<div class="container">
 
-<div class="card" style="width: 50rem;">
+
+
+<div class="container"  style="margin-top:10vh; margin-bottom:10vh;">
+
+<div class="card" >
         <div class="card-body">
             <div class="md-form mb-5">
 
@@ -137,6 +141,13 @@ else {
             </div>
         </div>
  </div>
+
+
+</div>
+
+
+
+
 
 
 </div>

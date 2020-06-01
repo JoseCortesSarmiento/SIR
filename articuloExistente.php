@@ -33,7 +33,11 @@ if ( !empty($_POST)) {
 ?>
 
 
-<div class="card" style="width: 50rem;">
+<div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+<div class="container"  style="margin-top:10vh; margin-bottom:50vh;">
+
+<div class="card">
     <div class="card-body">
         <div class="md-form mb-5">
 
@@ -48,7 +52,7 @@ if ( !empty($_POST)) {
                     <div class="md-form mb-5">
 
                        <select class="browser-default custom-select" name="articulo">
-                           <option selected>Elija un proveedor</option>
+                           <option selected>Elija un articulo</option>
                            <?php 
                            
                            $query = 'SELECT * FROM articulos'; 
@@ -94,4 +98,17 @@ if ( !empty($_POST)) {
    </form>
 </div>
 </div>
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
 </div>
