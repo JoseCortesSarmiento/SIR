@@ -113,7 +113,10 @@ $_SESSION['receta']=$id_receta;
 
 ?>
 
-<div class="container">
+<div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+
+<div class="container" style="margin-top:10vh; margin-bottom:10vh;">
 
     
 <div class="jumbotron">
@@ -230,6 +233,9 @@ $_SESSION['receta']=$id_receta;
 </div>
 </div>
 
+
+
+</div>
 <script>  
 	$(document).ready(function(){  
 		$('#articulos').DataTable();  

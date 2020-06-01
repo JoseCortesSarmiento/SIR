@@ -33,7 +33,7 @@ $proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
 
 
-<div class="container" style="margin-top:10vh;margin-bottom:10vh; " >  
+<div class="container" style="margin-top:10vh;margin-bottom:50vh; " >  
 <div class="card">
 
 		<div class="card-body">
