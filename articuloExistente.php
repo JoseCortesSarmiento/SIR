@@ -48,7 +48,7 @@ if ( !empty($_POST)) {
                     <div class="md-form mb-5">
 
                        <select class="browser-default custom-select" name="articulo">
-                           <option selected>Elija un proveedor</option>
+                           <option selected>Elija un articulo</option>
                            <?php 
                            
                            $query = 'SELECT * FROM articulos'; 
