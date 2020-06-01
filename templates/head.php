@@ -47,6 +47,10 @@ include 'global/header.php';
      <li class="nav-item">
      <a class="nav-link" href="historial.php">Historial</a>
      </li>
+
+     <li class="nav-item">
+     <a class="nav-link" href="lista_articulos.php">Lista de Compras</a>
+     </li>
       
     <?php } ?>
 
