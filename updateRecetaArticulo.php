@@ -16,6 +16,16 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 $id_receta=$_SESSION['receta'];
 
 
+// $query = $pdo->prepare("CREATE VIEW my_view AS ( SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total, r.rendimiento, a.id_articulo, a.stock_almacenado
+// FROM articulos a, recetas_articulos ra, recetas r, articulos_proveedores ap
+// WHERE r.id_receta=$id_receta AND ra.id_receta=r.id_receta AND ra.id_articulos_proveedores=ap.id_articulos_proveedores AND ap.id_articulo=a.id_articulo)");
+// $query->execute();
+// $listas=$query->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+
+
 
 
 
@@ -53,6 +63,9 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
         $stmt3 = $pdo->prepare($insertaPrecio);
         $stmt3->execute(['costo_total'=>$precioXgramaje,'id_receta_articulo'=>$id_receta_articulo ]);
 
+
+
+
         $pdo->commit(); 
 
 
@@ -68,8 +81,16 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
         throw $e;  
     } 
 
+
+    
+   
     
 }
+$query = $pdo->prepare(" SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total, r.rendimiento, a.id_articulo, a.stock_almacenado, ra.id_receta_articulo
+FROM articulos a, recetas_articulos ra, recetas r, articulos_proveedores ap
+WHERE r.id_receta=$id_receta AND ra.id_receta=r.id_receta AND ra.id_articulos_proveedores=ap.id_articulos_proveedores AND ap.id_articulo=a.id_articulo");
+$query->execute();
+$listas=$query->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -84,33 +105,34 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
 <div class="card">
 
 <div class="card-body">
+<h3 align="center">Agrega nuevos articulos a tu receta </h3>  
 
-<form action="articuloReceta.php" method="post">
+<form action="updateRecetaArticulo.php" method="post">
 
 <div class="table-responsive">  
 			<table id="articulos" class="table table-striped table-bordered">  
 				<thead>  
 					<tr>  
+                        <th>Seleccionar</th>
 						<th>Nombre</th>
 						<th>Proveedor</th>
                         <th>Precio</th>
-                        <th>ID articulos_proveedores</th>
-                        <th>Seleccionar</th>
+                       
 					</tr>  
 				</thead>  
 				<?php foreach ($articulos as $articulo): ?>
 					<tr>
-						<td> <?=$articulo['nombre']?></td>
-						<td> <?=$articulo['proveedor']?></td>
-						<td> <?=$articulo['precio']?></td>
-                        <td><?=$articulo['id_articulos_proveedores']?></td>
-                        <td>
+                    <td>
                         <div class="custom-control custom-radio">
                             <!-- <input type="radio" class="custom-control-input"  name="id_articulo" > -->
                             <input type="radio" name="id_articulos_proveedores" value="<?=$articulo['id_articulos_proveedores']?>">
                             <!-- <label class="custom-control-label" for="defaultUnchecked">Default unchecked</label> -->
                         </div>
                         </td>
+						<td> <?=$articulo['nombre']?></td>
+						<td> <?=$articulo['proveedor']?></td>
+						<td>$ <?=$articulo['precio']?></td>
+                       
 					</tr>
 				<?php endforeach; ?>
 			</table>  
@@ -128,9 +150,51 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
         <button type="submit"  class="btn  btn-default">Agregar</button>
 
 
-        <button><a href="detalleReceta.php?id_receta=<?=$id_receta?>" > Ver receta</a></button>
+        
     </div>
+    <h3 align="center">Articulos que ya contiene la receta</h3>  
+    <div class="table-responsive">  
+			<table id="articulos" class="table table-striped table-bordered">  
+				<thead>  
+					<tr>  
+						<th>Nombre</th>
+						<th>Gramaje</th>
+                        <th>Precio</th>
+                        <th>Eliminar articulo</th>
+                       
+					</tr>  
+				</thead>  
+				<?php foreach ($listas as $lista): ?>
+					<tr>
+                    
+                        
+						<td> <?=$lista['nombre']?></td>
+						<td> <?=$lista['gramaje']?></td>
+						<td> $<?=$lista['precio']?></td>
+                        <td>
+                        <span style="font-size: 32px; color: tomato;">
+                            <a href="deleteArticuloReceta.php?id_receta_articulo=<?=$lista['id_receta_articulo']?>" 
+                            class="btn btn-red btn-rounded mb-4" > 
+                            
+                            <i class="fas fa-trash-alt"></i></a>
+                        </span>  
+                        </td>
+                       
+					</tr>
+				<?php endforeach; ?>
+			</table>  
+
+    <div class="text-right">
+   
+   <span style="font-size: 32px; color: tomato;">
+                <a href="detalleReceta.php?id_receta=<?=$id_receta?>" 
+                class="btn btn-secondary-color btn-rounded mb-4" > 
+                <i class="fas fa-eye"></i></a>
+    </span> 
+   </div>
 </form>
+
+
 
 </div>
 

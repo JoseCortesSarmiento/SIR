@@ -102,6 +102,10 @@ if ( !empty($_POST)) {
 }
 
 
+
+
+
+
 ?>
 
 <div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">

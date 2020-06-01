@@ -8,24 +8,23 @@ if($_SESSION['usuario']['rol']!=1){
 }
 
 
+$id_receta=$_SESSION['receta'];
+
 if ( !empty($_POST)) {
     
-		
+    echo "eL ID DE LA RECETA ES ".$id_receta;
+
     // keep track post values		
     $nombre_platillo = $_POST['nombre_platillo'];
-     $foto_receta=$_POST['foto_receta'];
     $foto_receta=$_POST['foto_receta'];
     $categoria = $_POST['categoria'];
     $presentacion=$_POST['presentacion'];
     $mise_en_place=$_POST['mise_en_place'];
     $preparacion=$_POST['preparacion'];
     $rendimiento=$_POST['rendimiento'];
+    $id_receta=$_POST['id_receta'];
 
-    echo $foto_receta;
-    echo $categoria;
-    echo $presentacion;
 
-   
     
 
     try{
@@ -60,6 +59,24 @@ if ( !empty($_POST)) {
    
 }
 
+else { 
+     
+    $sql = "SELECT * FROM recetas where id_receta = ?"; 
+    $q = $pdo->prepare($sql); 
+    $q->execute(array($id_receta)); 
+    $data = $q->fetch(PDO::FETCH_ASSOC); 
+    $nombre_platillo = $data['nombre_platillo']; 
+    $foto_receta = $data['foto_receta']; 
+    $categoria = $data['categoria'];  
+    $presentacion = $data['presentacion'];   
+    $mise_en_place=$data['mise_en_place'];
+    $preparacion=$data['preparacion'];
+    $rendimiento=$data['rendimiento'];
+    // $id_receta=$data['id_receta']; 
+
+   
+} 
+
 
 ?>
 
@@ -81,12 +98,13 @@ if ( !empty($_POST)) {
     <div class="text-left">       
           <div class="md-form mb-5">
             <select class="browser-default custom-select" name="categoria" >
-                <option selected value="cocktail">Cocktail</option>
+                <option selected value="<?php echo $categoria ?>"><?php echo $categoria ?></option>
                 <option value="entrada">Entrada</option>
                 <option value="plato fuerte">Plato fuerte</option>
                 <option value="postre">Postre</option>
                 <option value="para compartir">Para compartir</option>
                 <option value="bebida">Bebida</option>
+                <option value="cocktail">Cocktail</option>
             </select>
           </div>
 
@@ -108,9 +126,9 @@ if ( !empty($_POST)) {
 
    
         
-    <div class="md-form mb-4 pink-textarea active-pink-textarea-2">
+    <div class="md-form mb-4 ">
         <i class="fas fa-angle-double-right prefix"></i>
-        <textarea  class="md-textarea form-control" rows="7" name="presentacion" value="<?php echo !empty($presentacion)?$presentacion:''; ?>"></textarea>
+        <textarea  class="md-textarea form-control validate" rows="7" name="presentacion" value="<?php echo !empty($presentacion)?$presentacion:''; ?>"></textarea>
         <label for="form23">Presentación</label>
     </div>
 
@@ -128,6 +146,8 @@ if ( !empty($_POST)) {
         <textarea id="form23" class="md-textarea form-control" rows="7" name="preparacion" value="<?php echo !empty($preparacion)?$preparacion:''; ?>"></textarea>
         <label for="form23">Preparación</label>
     </div>
+
+    <input type="text" hidden name="id_receta" value="<?php echo $id_receta ?>">
 
     <div class="modal-footer d-flex justify-content-center">
         <button type="submit"  class="btn btn-default ">Actualizar</button>
