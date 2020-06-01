@@ -47,7 +47,7 @@ if($_SESSION['usuario']['rol']!=1){
             <td>
 
             <span style="font-size: 32px; color: darkturquoise;">
-                <a href="updateRecetas.php?id_receta=
+                <a href="updateReceta.php?id_receta=
                 <?=$receta['id_receta']?>"
                 class="btn btn-default btn-rounded mb-4"  > 
                 <i class="fas fa-edit"></i></a>
