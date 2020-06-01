@@ -16,11 +16,12 @@ $id_session = $_SESSION['usuario']['id_usuario'];
 		$nombre = $_POST['nombre'];
         $estatus = $_POST['estatus'];
         $rol = $_POST['rol'];
+        $nacimiento = $_POST['nacimiento'];
         
-        $sql = "INSERT INTO usuarios ( correo, contra, nombre, estatus, rol) values(?, crypt(?, gen_salt('md5')), ?, ?, ?) RETURNING id_usuario;";
+        $sql = "INSERT INTO usuarios ( correo, contra, nombre, estatus, rol, nacimiento) values(?, crypt(?, gen_salt('md5')), ?, ?, ?, ?) RETURNING id_usuario;";
 			$stmt = $conn->prepare($sql);
-            $stmt->execute([$correo, $contra, $nombre, $estatus, $rol]);
-           
+            $stmt->execute([$correo, $contra, $nombre, $estatus, $rol, $nacimiento]);
+        print_r($nacimiento);   
         $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
         $id_usuario = $resultado['id_usuario'];
         
@@ -65,6 +66,11 @@ $id_session = $_SESSION['usuario']['id_usuario'];
                                                         <div class="md-form mb-5">
                                                             <input type="text" id="defaultForm-email" class="form-control validate" name="nombre" >
                                                             <label data-error="wrong" data-success="right" for="defaultForm-email">Nombre</label>
+                                                        </div>
+
+                                                        <div class="md-form mb-5">
+                                                            <input type="text" id="defaultForm-email" class="form-control validate" name="nacimiento" >
+                                                            <label data-error="wrong" data-success="right" for="defaultForm-email">Fecha de nacimiento (yyyy-mm-dd)</label>
                                                         </div>
 
                                                         <div class="md-form mb-5">
