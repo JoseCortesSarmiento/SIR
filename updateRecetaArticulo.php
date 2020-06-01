@@ -16,6 +16,21 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 $id_receta=$_SESSION['receta'];
 
 
+// $query = $pdo->prepare("CREATE VIEW my_view AS ( SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total, r.rendimiento, a.id_articulo, a.stock_almacenado
+// FROM articulos a, recetas_articulos ra, recetas r, articulos_proveedores ap
+// WHERE r.id_receta=$id_receta AND ra.id_receta=r.id_receta AND ra.id_articulos_proveedores=ap.id_articulos_proveedores AND ap.id_articulo=a.id_articulo)");
+// $query->execute();
+// $listas=$query->fetchAll(PDO::FETCH_ASSOC);
+
+
+$query = $pdo->prepare(" SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total, r.rendimiento, a.id_articulo, a.stock_almacenado
+FROM articulos a, recetas_articulos ra, recetas r, articulos_proveedores ap
+WHERE r.id_receta=$id_receta AND ra.id_receta=r.id_receta AND ra.id_articulos_proveedores=ap.id_articulos_proveedores AND ap.id_articulo=a.id_articulo");
+$query->execute();
+$listas=$query->fetchAll(PDO::FETCH_ASSOC);
+
+
+
 
 
 
@@ -84,6 +99,7 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
 <div class="card">
 
 <div class="card-body">
+<h3 align="center">Agrega nuevos articulos a tu receta </h3>  
 
 <form action="updateRecetaArticulo.php" method="post">
 
@@ -109,7 +125,7 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
                         </td>
 						<td> <?=$articulo['nombre']?></td>
 						<td> <?=$articulo['proveedor']?></td>
-						<td> <?=$articulo['precio']?></td>
+						<td>$ <?=$articulo['precio']?></td>
                        
 					</tr>
 				<?php endforeach; ?>
@@ -130,6 +146,28 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
 
         
     </div>
+    <h3 align="center">Articulos que ya contiene la receta</h3>  
+    <div class="table-responsive">  
+			<table id="articulos" class="table table-striped table-bordered">  
+				<thead>  
+					<tr>  
+						<th>Nombre</th>
+						<th>Gramaje</th>
+                        <th>Precio</th>
+                       
+					</tr>  
+				</thead>  
+				<?php foreach ($listas as $lista): ?>
+					<tr>
+                    
+                        
+						<td> <?=$lista['nombre']?></td>
+						<td> <?=$lista['gramaje']?></td>
+						<td> $<?=$lista['precio']?></td>
+                       
+					</tr>
+				<?php endforeach; ?>
+			</table>  
 
     <div class="text-right">
    
@@ -140,6 +178,8 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
     </span> 
    </div>
 </form>
+
+
 
 </div>
 
