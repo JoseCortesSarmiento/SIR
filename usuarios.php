@@ -43,6 +43,7 @@ $usuarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
             <th>Usuario</th>
             <th>Contrseña</th>
             <th>Nombre</th>
+            <th>Fecha de Nacimiento</th>
             <th>Estatus</th>
             <th>Rol</th>
             <th>Acciones</th>
@@ -53,6 +54,7 @@ $usuarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
             <td> <?=$usuario['correo']?></td>
             <td> <input type='password' value='". <?=$usuario['contra']?> ."' readonly='readonly'></td>
             <td> <?=$usuario['nombre']?></td>
+            <td align="center"> <?=$usuario['nacimiento']?></td>
             <td> <?php 				
                 if ($usuario['estatus']==0) 
                     echo "Inactivo"; 

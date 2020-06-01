@@ -1,5 +1,5 @@
-usuarios.backup.insertOne(
-{correo: “test2@mail.com”, contra: “test2”, nombre: “test2”, estatus: true, rol: true}
+db.backup.insertOne(
+{nombre: “test”, correo: “test@mail.com”, telefono: “1234567”, direccion: "Avenida Test"}
 )
 
 <?php

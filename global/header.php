@@ -28,6 +28,6 @@
 
 
 <script src="js/miscript.js"></script>
-    <title>Recetas</title>
+    <title>Sistema Restaurante</title>
 </head>
 <body>
