@@ -85,32 +85,32 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
 
 <div class="card-body">
 
-<form action="articuloReceta.php" method="post">
+<form action="updateRecetaArticulo.php" method="post">
 
 <div class="table-responsive">  
 			<table id="articulos" class="table table-striped table-bordered">  
 				<thead>  
 					<tr>  
+                        <th>Seleccionar</th>
 						<th>Nombre</th>
 						<th>Proveedor</th>
                         <th>Precio</th>
-                        <th>ID articulos_proveedores</th>
-                        <th>Seleccionar</th>
+                       
 					</tr>  
 				</thead>  
 				<?php foreach ($articulos as $articulo): ?>
 					<tr>
-						<td> <?=$articulo['nombre']?></td>
-						<td> <?=$articulo['proveedor']?></td>
-						<td> <?=$articulo['precio']?></td>
-                        <td><?=$articulo['id_articulos_proveedores']?></td>
-                        <td>
+                    <td>
                         <div class="custom-control custom-radio">
                             <!-- <input type="radio" class="custom-control-input"  name="id_articulo" > -->
                             <input type="radio" name="id_articulos_proveedores" value="<?=$articulo['id_articulos_proveedores']?>">
                             <!-- <label class="custom-control-label" for="defaultUnchecked">Default unchecked</label> -->
                         </div>
                         </td>
+						<td> <?=$articulo['nombre']?></td>
+						<td> <?=$articulo['proveedor']?></td>
+						<td> <?=$articulo['precio']?></td>
+                       
 					</tr>
 				<?php endforeach; ?>
 			</table>  

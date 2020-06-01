@@ -83,33 +83,35 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
 
 <div class="card-body">
 
-
+<h3 align="center">Agrega artículos a la receta </h3>  
 <form action="articuloReceta.php" method="post">
 
 <div class="table-responsive">  
 			<table id="articulos" class="table table-striped table-bordered">  
 				<thead>  
 					<tr>  
+                        <th>Seleccionar</th>
 						<th>Nombre</th>
 						<th>Proveedor</th>
                         <th>Precio</th>
-                        <th>ID articulos_proveedores</th>
-                        <th>Seleccionar</th>
+                        <!-- <th>ID articulos_proveedores</th> -->
+                        
 					</tr>  
 				</thead>  
 				<?php foreach ($articulos as $articulo): ?>
 					<tr>
-						<td> <?=$articulo['nombre']?></td>
-						<td> <?=$articulo['proveedor']?></td>
-						<td> <?=$articulo['precio']?></td>
-                        <td><?=$articulo['id_articulos_proveedores']?></td>
-                        <td>
+                    <td>
                         <div class="custom-control custom-radio">
                             <!-- <input type="radio" class="custom-control-input"  name="id_articulo" > -->
                             <input type="radio" name="id_articulos_proveedores" value="<?=$articulo['id_articulos_proveedores']?>">
                             <!-- <label class="custom-control-label" for="defaultUnchecked">Default unchecked</label> -->
                         </div>
                         </td>
+						<td> <?=$articulo['nombre']?></td>
+						<td> <?=$articulo['proveedor']?></td>
+						<td>$ <?=$articulo['precio']?></td>
+                       
+                        
 					</tr>
 				<?php endforeach; ?>
 			</table>  
@@ -127,8 +129,17 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
         <button type="submit"  class="btn  btn-default">Agregar</button>
 
 
-        <button><a href="detalleReceta.php?id_receta=<?=$id_receta?>" > Ver receta</a></button>
+        
     </div>
+
+   <div class="text-right">
+   
+   <span style="font-size: 32px; color: tomato;">
+                <a href="detalleReceta.php?id_receta=<?=$id_receta?>" 
+                class="btn btn-secondary-color btn-rounded mb-4" > 
+                <i class="fas fa-eye"></i></a>
+    </span> 
+   </div>
 </form>
 
 </div>
