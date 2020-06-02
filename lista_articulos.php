@@ -37,7 +37,7 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 	
 	
 	
-	<div class="container" style="margin-top:10vh;margin-bottom:50vh; ">  
+	<div class="container" style="margin-top:10vh;margin-bottom:80vh; ">  
 		<div class="card">
 		
 		
