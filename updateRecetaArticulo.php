@@ -184,14 +184,14 @@ $listas=$query->fetchAll(PDO::FETCH_ASSOC);
 				<?php endforeach; ?>
 			</table>  
 
-    <div class="text-right">
+    <!-- <div class="text-right">
    
    <span style="font-size: 32px; color: tomato;">
                 <a href="detalleReceta.php?id_receta=<?=$id_receta?>" 
                 class="btn btn-secondary-color btn-rounded mb-4" > 
                 <i class="fas fa-eye"></i></a>
     </span> 
-   </div>
+   </div> -->
 </form>
 
 
