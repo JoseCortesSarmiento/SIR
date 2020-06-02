@@ -14,7 +14,7 @@ if($_SESSION['usuario']['rol']!=1){
 function getCodigo(){
 
     $host= "localhost";
-    $dbname= "sistemarest2";
+    $dbname= "sistemarest";
     $username="root";
     $password="";
    

@@ -23,7 +23,7 @@ if (!empty($_GET['id_receta'])) {
 function getImporte(int $id_receta){
 
    $host= "localhost";
-   $dbname= "sistemarest2";
+   $dbname= "sistemarest";
    $username="root";
    $password="";
   

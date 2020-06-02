@@ -52,6 +52,6 @@ try{
    'mongodb+srv://testing-admin:lestatme1@testing-zs41u.mongodb.net/');
 
   if($client){
-    echo  nl2br ("Connection to MongoDBAtlas successfully\n");
+    //echo  nl2br ("Connection to MongoDBAtlas successfully\n");
   }
 ?>
