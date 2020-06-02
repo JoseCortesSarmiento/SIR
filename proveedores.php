@@ -21,17 +21,20 @@ include 'addProveedor.php';
 ini_set("display_errors", "1");
 error_reporting(E_ALL);
 
-$sentencia = $pdo->prepare('SELECT * FROM proveedores');
+$sentencia = $pdo->prepare('SELECT * FROM mis_proveedores');
 $sentencia->execute();
 $proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+
+// $correo=$pdo->pepara('SELECT * FROM correoproveedores');
+// $correo->execute();
+// $correos = $correo->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 <br />
 <br /> 
 
 <div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-
-
 
 <div class="container" style="margin-top:10vh;margin-bottom:50vh; " >  
 <div class="card">
@@ -79,6 +82,12 @@ $proveedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 <a href="deleteProveedor.php?id_proveedor=<?=$proveedor['id_proveedor']?>" 
                 class="btn btn-red btn-rounded mb-4" > 
                 <i class="fas fa-trash-alt"></i></a>
+            </span>  
+
+            <span style="font-size: 32px; color: tomato;">
+                <a href="<?="mailto:".$proveedor['correo']?>" 
+                class="btn btn-purple btn-rounded mb-4" > 
+                <i class="fas fa-envelope"></i></a>
             </span>  
             <?php endif; ?>
             </td>

@@ -8,7 +8,12 @@ if($_SESSION['usuario']['rol']!=1){
 }
 
 
-$id_receta=$_SESSION['receta'];
+if (!empty($_GET['id_receta'])) { 
+    $id_receta = $_REQUEST['id_receta']; 
+    //  echo $id_proveedor;
+} 
+
+// $id_receta=$_SESSION['receta'];
 
 if ( !empty($_POST)) {
     
@@ -28,7 +33,7 @@ if ( !empty($_POST)) {
     
 
     try{
-        $id_receta=$_SESSION['receta'];
+        // $id_receta=$_SESSION['receta'];
         $pdo->beginTransaction(); 
         $sql = "UPDATE recetas SET nombre_platillo=:nombre_platillo, foto_receta=:foto_receta, categoria=:categoria,  presentacion=:presentacion, mise_en_place=:mise_en_place, preparacion=:preparacion, rendimiento=:rendimiento where id_receta=:id_receta";
         $stmt = $pdo->prepare($sql);

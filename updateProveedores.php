@@ -74,7 +74,7 @@ else {
 
 
 
-<div class="container"  style="margin-top:10vh; margin-bottom:10vh;">
+<div class="container"  style="margin-top:10vh; margin-bottom:60vh;">
 
 
 <div class="card" >

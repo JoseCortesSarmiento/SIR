@@ -21,7 +21,7 @@ include 'global/sesion.php';
 <div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
 
     
-    <div class="container" style="margin-top:10vh;margin-bottom:40vh; ">  
+    <div class="container" style="margin-top:10vh;margin-bottom:60vh; ">  
 	<div class="card">
     
     
