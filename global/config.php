@@ -12,6 +12,6 @@ define ("DATABASE_NAME", "sistemarest");
 $host='localhost';
 $db = 'sistemarest';
 $username = 'postgres';
-$password = 'bego';
+$password = 'postgres';
 
 ?>
