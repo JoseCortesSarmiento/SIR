@@ -106,7 +106,7 @@ if($numeroRegistros>=1){
     <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
 
       <!-- Content -->
-      <div class="container">
+      <div class="container" >
 
         <!--Grid row-->
         <div class="row wow fadeIn">

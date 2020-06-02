@@ -128,7 +128,7 @@ else {
         
     <div class="md-form mb-4 ">
         <i class="fas fa-angle-double-right prefix"></i>
-        <textarea  class="md-textarea form-control validate" rows="7" name="presentacion" value="<?php echo !empty($presentacion)?$presentacion:''; ?>"><?php echo !empty($presentacion)?$presentacion:''; ?>"</textarea>
+        <textarea  class="md-textarea form-control validate" rows="7" name="presentacion" value="<?php echo !empty($presentacion)?$presentacion:''; ?>"><?php echo !empty($presentacion)?$presentacion:''; ?></textarea>
         <label for="form23">Presentación</label>
     </div>
 

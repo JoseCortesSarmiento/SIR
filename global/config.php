@@ -10,7 +10,7 @@ define ("DATABASE_NAME", "sistemarest2");
 
 //PGSQL
 $host='localhost';
-$db = 'sistemarest';
+$db = 'sistemarest3';
 $username = 'postgres';
 $password = 'bego';
 
