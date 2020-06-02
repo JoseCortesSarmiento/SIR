@@ -76,6 +76,7 @@ else {
     $contra = $data['contra']; 
     $nombre = $data['nombre']; 
     $estatus = $data['estatus']; 
+    $nacimiento = $data['nacimiento']; 
     $rol = $data['rol'];    
 } 
  
@@ -111,7 +112,7 @@ else {
                     </div>
 
                     <div class="md-form mb-5">
-                    <input type="text"  class="form-control validate" name="nacimiento" value="<?php echo !empty($nombre)?$nombre:''; ?>">
+                    <input type="text"  class="form-control validate" name="nacimiento" value="<?php echo !empty($nacimiento)?$nacimiento:''; ?>">
                     <label data-error="wrong" data-success="right">Fecha de nacimiento (yyyy-mm-dd)</label>
                     </div>
 

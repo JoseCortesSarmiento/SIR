@@ -99,6 +99,7 @@ $listas=$query->fetchAll(PDO::FETCH_ASSOC);
 					<tr>  
                         <th>Seleccionar</th>
 						<th>Nombre</th>
+                        <th>Unidad</th>
 						<th>Proveedor</th>
                         <th>Precio</th>
                         <!-- <th>ID articulos_proveedores</th> -->
@@ -114,7 +115,9 @@ $listas=$query->fetchAll(PDO::FETCH_ASSOC);
                             <!-- <label class="custom-control-label" for="defaultUnchecked">Default unchecked</label> -->
                         </div>
                         </td>
+
 						<td> <?=$articulo['nombre']?></td>
+                        <td> <?=$articulo['unidad_medida']?></td>
 						<td> <?=$articulo['proveedor']?></td>
 						<td>$ <?=$articulo['precio']?></td>
                        
