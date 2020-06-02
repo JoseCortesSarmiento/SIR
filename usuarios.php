@@ -30,10 +30,14 @@ $sentencia = $conn->prepare('SELECT * FROM usuarios');
 $sentencia->execute();
 $usuarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 ?>
-<br />
-<br />  
-	<div class="container">  
-		<h3 align="center">Usuarios</h3>  
+ <div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+    <div class="container"  style="margin-top:10vh;margin-bottom:50vh;">  
+		<div class="card">
+        
+            <div class="card-body">
+            
+            <h3 align="center">Usuarios</h3>  
 		<br />  
 		<div class="table-responsive">  
 
@@ -92,7 +96,10 @@ $usuarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
   data-target="#modalAddUsuario">Agregar usuario</a>
 </div>
 </div>  
+            </div>
+        </div>
 	</div> 
+    </div>
 <script>  
 	$(document).ready(function(){  
 		$('#usuarios').DataTable();  

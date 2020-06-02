@@ -76,6 +76,7 @@ else {
     $contra = $data['contra']; 
     $nombre = $data['nombre']; 
     $estatus = $data['estatus']; 
+    $nacimiento = $data['nacimiento']; 
     $rol = $data['rol'];    
 } 
  
@@ -83,9 +84,11 @@ else {
 ?> 
  
 
-        
+ <div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
 
- <div class="card" style="width: 50rem;">
+<div class="container"  style="margin-top:10vh; margin-bottom:10vh;">
+ 
+ <div class="card" >
         <div class="card-body">
             <div class="md-form mb-5">
 
@@ -111,7 +114,7 @@ else {
                     </div>
 
                     <div class="md-form mb-5">
-                    <input type="text"  class="form-control validate" name="nacimiento" value="<?php echo !empty($nombre)?$nombre:''; ?>">
+                    <input type="text"  class="form-control validate" name="nacimiento" value="<?php echo !empty($nacimiento)?$nacimiento:''; ?>">
                     <label data-error="wrong" data-success="right">Fecha de nacimiento (yyyy-mm-dd)</label>
                     </div>
 
@@ -143,5 +146,9 @@ else {
         </div>
  </div>
 
+ 
+ </div>
      
     
+
+</div>

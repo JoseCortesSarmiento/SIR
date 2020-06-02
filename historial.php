@@ -26,10 +26,15 @@ $sentencia = $conn->prepare('SELECT * FROM historial');
 $sentencia->execute();
 $historiales = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 ?>
-<br />
-<br />  
-	<div class="container">  
-		<h3 align="center">Historial</h3>  
+
+<div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+    
+    <div class="container" style="margin-top:10vh;margin-bottom:50vh; ">  
+		<div class="card">
+            <div class="card-body">
+            
+            <h3 align="center">Historial</h3>  
 		<br />  
 		<div class="table-responsive">  
 
@@ -53,7 +58,10 @@ $historiales = $sentencia->fetchAll(PDO::FETCH_ASSOC);
     <?php endforeach; ?>
 </table>
 </div>  
-	</div> 
+            </div>
+        </div>
+	</div>
+    </div> 
 <script>  
 	$(document).ready(function(){  
 		$('#historial').DataTable();  

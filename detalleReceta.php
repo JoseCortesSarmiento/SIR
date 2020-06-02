@@ -23,7 +23,7 @@ if (!empty($_GET['id_receta'])) {
 function getImporte(int $id_receta){
 
    $host= "localhost";
-   $dbname= "sistemarest";
+   $dbname= "sistemarest2";
    $username="root";
    $password="";
   
@@ -184,7 +184,7 @@ $articulos = $q->fetchAll(PDO::FETCH_ASSOC);
    
     <a class="btn btn-primary btn-lg" role="button" href="recetas.php">Ver todas</a>
     <div class="text-center">
-  <a class="btn btn-default btn-rounded mb-4" href="backupDetalleRecetas.php?id_receta=<?=$receta['id_receta']?>">Backup</a>
+  <a class="btn btn-purple btn-rounded mb-4" href="backupDetalleRecetas.php?id_receta=<?=$receta['id_receta']?>">Backup</a>
 </div>
 </div>
 </div>

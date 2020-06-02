@@ -10,10 +10,14 @@ include 'global/sesion.php';
 include 'global/header.php';
 ?>
 
-<br />
-<br />  
-	<div class="container">  
-		<h3 align="center">Backup Recetas</h3>  
+<div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+<div class="container" style="margin-top:10vh;margin-bottom:50vh; ">  
+		<div class="card">
+        
+            <div class="card-body">
+            
+            <h3 align="center">Backup Recetas</h3>  
 		<br />  
 		<div class="table-responsive">  
         
@@ -109,8 +113,12 @@ include 'global/header.php';
   <a href="deleteBackupDetRecetas.php" 
   class="btn btn-default btn-rounded mb-4">Borrar</a>
 </div>
-</div>  
+</div> 
+            </div>
+        </div> 
 	</div> 
+
+</div>
 <script>  
 	$(document).ready(function(){  
 		$('#recetas').DataTable();  

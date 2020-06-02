@@ -128,14 +128,14 @@ else {
         
     <div class="md-form mb-4 ">
         <i class="fas fa-angle-double-right prefix"></i>
-        <textarea  class="md-textarea form-control validate" rows="7" name="presentacion" value="<?php echo !empty($presentacion)?$presentacion:''; ?>"></textarea>
+        <textarea  class="md-textarea form-control validate" rows="7" name="presentacion" value="<?php echo !empty($presentacion)?$presentacion:''; ?>"><?php echo !empty($presentacion)?$presentacion:''; ?>"</textarea>
         <label for="form23">Presentación</label>
     </div>
 
     <hr class="my-2">
     <div class="md-form mb-4 pink-textarea active-pink-textarea-2">
         <i class="fas fa-angle-double-right prefix"></i>
-        <textarea  class="md-textarea form-control" rows="7" name="mise_en_place" value="<?php echo !empty($mise_en_place)?$mise_en_place:''; ?>"></textarea>
+        <textarea  class="md-textarea form-control" rows="7" name="mise_en_place" value="<?php echo !empty($mise_en_place)?$mise_en_place:''; ?>"><?php echo !empty($mise_en_place)?$mise_en_place:''; ?></textarea>
         <label for="form23">Mise en place</label>
     </div>
 
@@ -143,7 +143,7 @@ else {
     <hr class="my-2">
     <div class="md-form mb-4 pink-textarea active-pink-textarea-2">
         <i class="fas fa-angle-double-right prefix"></i>
-        <textarea id="form23" class="md-textarea form-control" rows="7" name="preparacion" value="<?php echo !empty($preparacion)?$preparacion:''; ?>"></textarea>
+        <textarea id="form23" class="md-textarea form-control" rows="7" name="preparacion" value="<?php echo !empty($preparacion)?$preparacion:''; ?>"><?php echo !empty($preparacion)?$preparacion:''; ?></textarea>
         <label for="form23">Preparación</label>
     </div>
 
