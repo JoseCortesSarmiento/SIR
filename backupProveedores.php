@@ -9,11 +9,13 @@ include 'templates/head.php';
 include 'global/sesion.php';
 include 'global/header.php';
 ?>
+ 
+ <div class="view full-page-intro" style="background-image: url('https://www.losdanzantes.com/assets/img/oaxaca/los-danzantes-oaxaca.jpg'); background-repeat: no-repeat; background-size: cover;">
 
-<br />
-<br />  
-	<div class="container">  
-		<h3 align="center">Backup Proveedores</h3>  
+  <div class="container" style="margin-top:10vh;margin-bottom:50vh; ">  
+  <div class="card">
+    <div class="card-body">
+    <h3 align="center">Backup Proveedores</h3>  
 		<br />  
 		<div class="table-responsive">  
 
@@ -67,7 +69,12 @@ include 'global/header.php';
   class="btn btn-default btn-rounded mb-4">Borrar</a>
 </div>
 </div>  
+    
+    </div>
+  </div>
 	</div> 
+  
+  </div>
 <script>  
 	$(document).ready(function(){  
 		$('#proveedores').DataTable();  
