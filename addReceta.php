@@ -85,8 +85,8 @@ if ( !empty($_POST)) {
         // print_r($arr);
 
         //de articulos
-        header('location: articuloReceta.php');
-
+        //header('location: articuloReceta.php');
+        echo '<script>location.replace("articuloReceta.php")</script>';
         
 
     }
