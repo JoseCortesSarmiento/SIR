@@ -15,20 +15,6 @@ $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
 $id_receta=$_SESSION['receta'];
 
-
-// $query = $pdo->prepare("CREATE VIEW my_view AS ( SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total, r.rendimiento, a.id_articulo, a.stock_almacenado
-// FROM articulos a, recetas_articulos ra, recetas r, articulos_proveedores ap
-// WHERE r.id_receta=$id_receta AND ra.id_receta=r.id_receta AND ra.id_articulos_proveedores=ap.id_articulos_proveedores AND ap.id_articulo=a.id_articulo)");
-// $query->execute();
-// $listas=$query->fetchAll(PDO::FETCH_ASSOC);
-
-
-
-
-
-
-
-
 if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {	
     $gramaje = $_POST['gramaje'];
     $id_articulos_proveedores =$_POST['id_articulos_proveedores'];
@@ -88,8 +74,8 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
 }
 $query = $pdo->prepare(" SELECT a.nombre,ra.gramaje, a.unidad_medida, ap.precio, ra.costo_total, r.rendimiento, a.id_articulo, a.stock_almacenado, ra.id_receta_articulo
 FROM articulos a, recetas_articulos ra, recetas r, articulos_proveedores ap
-WHERE r.id_receta=$id_receta AND ra.id_receta=r.id_receta AND ra.id_articulos_proveedores=ap.id_articulos_proveedores AND ap.id_articulo=a.id_articulo");
-$query->execute();
+WHERE r.id_receta=? AND ra.id_receta=r.id_receta AND ra.id_articulos_proveedores=ap.id_articulos_proveedores AND ap.id_articulo=a.id_articulo");
+$query->execute([$id_receta]);
 $listas=$query->fetchAll(PDO::FETCH_ASSOC);
 
 

@@ -85,6 +85,9 @@ if ( !empty($_POST)) {
     catch(Exception $e){
         if($pdo->inTransaction()) $pdo->rollback();
         $errores = 1;  
+        echo '<script type="text/javascript">'; 
+        echo 'setTimeout(function () { swal("¡ERROR!","El producto no pudo ser actualizado","error");'; 
+        echo '}, 500);</script>'; 
         // var_dump($e);
     }
    
