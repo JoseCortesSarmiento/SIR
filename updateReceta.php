@@ -48,7 +48,7 @@ if ( !empty($_POST)) {
         // print_r($arr);
 
         //de articulos
-        header('location: updateRecetaArticulo.php');
+        // header('location: updateRecetaArticulo.php');
 
         
 
@@ -155,8 +155,14 @@ else {
     <input type="text" hidden name="id_receta" value="<?php echo $id_receta ?>">
 
     <div class="modal-footer d-flex justify-content-center">
-        <button type="submit"  class="btn btn-default ">Actualizar</button>
+        <button type="submit"  class="btn btn-default ">Actualizar formato</button>
     </div>
+
+    <span style="font-size: 32px; color: tomato;">
+                <a href="updateRecetaArticulo.php?id_receta=<?=$id_receta?>" 
+                class="btn btn-secondary-color btn-rounded mb-4" > 
+                Actualizar detalles receta</a>
+    </span> 
 
 </form>
 

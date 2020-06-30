@@ -64,9 +64,7 @@ if ( !empty($_POST)) {
     foreach ($articulos as $articulo) {
         if($articulo['stock_almacenado']-($articulo['gramaje']*$rendimiento2)<0) {
             $disminuirStock->execute(['dsa']);
-            echo '<script type="text/javascript">'; 
-            echo 'setTimeout(function () { swal("¡ERROR!","El producto no pudo ser actualizado","error");'; 
-            echo '}, 500);</script>'; 
+            
         }
             
         else{
@@ -86,8 +84,8 @@ if ( !empty($_POST)) {
         if($pdo->inTransaction()) $pdo->rollback();
         $errores = 1;  
         echo '<script type="text/javascript">'; 
-        echo 'setTimeout(function () { swal("¡ERROR!","El producto no pudo ser actualizado","error");'; 
-        echo '}, 500);</script>'; 
+            echo 'setTimeout(function () { swal("¡ERROR!","No hay suficientes productos para realizar la receta","error");'; 
+            echo '}, 500);</script>'; 
         // var_dump($e);
     }
    

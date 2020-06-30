@@ -13,11 +13,15 @@ $sentencia->execute();
 $articulos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
 
-$id_receta=$_SESSION['receta'];
+if (!empty($_GET['id_receta'])) { 
+    $id_receta = $_GET['id_receta']; 
+      echo $id_receta;
+} 
 
-if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {	
+if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] || !empty($_POST['id_receta'] ))) {	
     $gramaje = $_POST['gramaje'];
     $id_articulos_proveedores =$_POST['id_articulos_proveedores'];
+    $id_receta=$_POST['id_receta']; 
 
     
     echo "El gramaje es".$gramaje;
@@ -26,6 +30,10 @@ if ( !empty($_POST['id_articulos_proveedores'])||!empty($_POST['gramaje'] )) {
     
 
     try{
+        if (!empty($_GET['id_receta'])) { 
+            $id_receta = $_GET['id_receta']; 
+              echo $id_receta;
+        } 
         $pdo->beginTransaction(); 
         $sql = "INSERT INTO recetas_articulos (id_articulos_proveedores,id_receta,gramaje) values(?, ?, ?)";
         $stmt = $pdo->prepare($sql);
@@ -91,7 +99,8 @@ $listas=$query->fetchAll(PDO::FETCH_ASSOC);
 <div class="card">
 
 <div class="card-body">
-<h3 align="center">Agrega nuevos articulos a tu receta </h3>  
+<h3 align="center">Agrega nuevos articulos a tu receta </h3> 
+
 
 <form action="updateRecetaArticulo.php" method="post">
 
@@ -125,11 +134,12 @@ $listas=$query->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
         <div class="md-form mb-5">
-            <input type="text"  class="form-control validate" name="gramaje" >
+            <input type="text"  class="form-control validate" name="gramaje">
             <label data-error="wrong" data-success="right" >Gramaje del producto seleccionado</label>
         </div>
 
-         
+        <input type="text" hidden name="id_receta" value="<?php echo $id_receta ?>">
+
 
 
         <div class="modal-footer d-flex justify-content-center">
@@ -170,14 +180,14 @@ $listas=$query->fetchAll(PDO::FETCH_ASSOC);
 				<?php endforeach; ?>
 			</table>  
 
-    <!-- <div class="text-right">
+    <div class="text-right">
    
    <span style="font-size: 32px; color: tomato;">
                 <a href="detalleReceta.php?id_receta=<?=$id_receta?>" 
                 class="btn btn-secondary-color btn-rounded mb-4" > 
                 <i class="fas fa-eye"></i></a>
     </span> 
-   </div> -->
+   </div>
 </form>
 
 
