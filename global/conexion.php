@@ -51,7 +51,7 @@ try{
  $client = new MongoDB\Driver\Manager(
    'mongodb+srv://testing-admin:lestatme1@testing-zs41u.mongodb.net/');
 
-  // if($client){
-  //   echo  nl2br ("Connection to MongoDBAtlas successfully\n");
-  // }
+  if($client){
+    //echo  nl2br ("Connection to MongoDBAtlas successfully\n");
+  }
 ?>

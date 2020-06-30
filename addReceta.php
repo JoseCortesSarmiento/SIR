@@ -14,7 +14,7 @@ if($_SESSION['usuario']['rol']!=1){
 function getCodigo(){
 
     $host= "localhost";
-    $dbname= "sistemarest2";
+    $dbname= "sistemarest";
     $username="root";
     $password="";
    
@@ -85,8 +85,8 @@ if ( !empty($_POST)) {
         // print_r($arr);
 
         //de articulos
-        header('location: articuloReceta.php');
-
+        //header('location: articuloReceta.php');
+        echo '<script>location.replace("articuloReceta.php")</script>';
         
 
     }
